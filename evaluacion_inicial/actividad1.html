@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+</head>
+<body>
+    <h1>Actividad 1</h1>
+    <!-- Se pone en el body en vez de en head para que no se cargue antes de que se cargue el body. -->
+    <script>
+        const LIMITE_EDAD_VALIDA = 0;
+	    const MAYORIA_EDAD = 18;
+	    const LIMITE_JOVEN = 35;
+	
+	    const MENSAJE_LIMITE_EDAD_VALIDA = "ERROR: Edad no válida.";
+	    const MENSAJE_MAYORIA_EDAD = "Es menor de edad.";
+	    const MENSAJE_LIMITE_JOVEN = "Es joven.";
+	    const MENSAJE_MADURO = "Es maduro.";
+
+        main();
+
+        function main() {
+            // Prueba edad errónea:
+            console.log(getClasificacionEdad(-2));
+            // Prueba edad 0:
+            console.log(getClasificacionEdad(0));
+            // Prueba edad 18:
+            console.log(getClasificacionEdad(18));
+            // Prueba edad 34:
+            console.log(getClasificacionEdad(34));
+            // Prueba edad 35:
+            console.log(getClasificacionEdad(35));
+        }
+
+        function getClasificacionEdad(edad) {
+            let str = "";
+
+            if(edad <= LIMITE_EDAD_VALIDA) {
+                str = MENSAJE_LIMITE_EDAD_VALIDA;
+            } else if(edad < MAYORIA_EDAD) {
+                str = MENSAJE_MAYORIA_EDAD;
+            } else if(edad < LIMITE_JOVEN) {
+                str = MENSAJE_LIMITE_JOVEN;
+            } else {
+                str = MENSAJE_MADURO;
+            }
+
+            return str;
+        }
+    </script>
+</body>
+</html>
