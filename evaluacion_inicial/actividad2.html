@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+</head>
+<body>
+    <h1>Actividad 2</h1>
+    <script>
+    const DIAS_SEMANA = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"];
+	
+    main();
+
+	function main() {
+		for(let i=0; i<10; i++) {
+			console.log(getRandomWeekDay());
+		}
+	}
+	
+	function getRandomWeekDay() {
+		// int num = (int) (Math.random()*7 - 1);
+		num = getRandomBetween(0, 6);
+		
+		return DIAS_SEMANA[num];
+	}
+
+	function getRandomBetween(min, max) {
+		return Math.floor(Math.random()*(max-min+1)) + min;
+	}
+    </script>
+</body>
+</html>
