@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+</head>
+<body>
+    <h1>SHUFFLE ARRAY</h1>
+    <script>
+	
+    main();
+
+	function main() {
+        let A = [1,2,3,4];
+        for(let i=0; i<10; i++) {
+            console.log(shuffle_array(A));
+        }
+	}
+
+    function shuffle_array(A) {
+        for(let i=A.length-1; i>=0; i--) {
+            let pos = getRandomBetween(0, i);
+            let num = A[pos];
+            A[pos] = A[i];
+            A[i] = num;
+        }
+        return A;
+    }
+
+	function getRandomBetween(min, max) {
+		return Math.floor(Math.random()*(max-min+1)) + min;
+	}
+    </script>
+</body>
+</html>
