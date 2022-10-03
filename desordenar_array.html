@@ -9,29 +9,28 @@
 <body>
     <h1>SHUFFLE ARRAY</h1>
     <script>
-	
-    main();
-
-	function main() {
-        let A = [1,2,3,4];
-        for(let i=0; i<10; i++) {
-            console.log(shuffle_array(A));
+        main();
+        
+        function main() {
+            let A = [1,2,3,4];
+            for(let i=0; i<10; i++) {
+                console.log(shuffle_array(A));
+            }
         }
-	}
-
-    function shuffle_array(A) {
-        for(let i=A.length-1; i>=0; i--) {
-            let pos = getRandomBetween(0, i);
-            let num = A[pos];
-            A[pos] = A[i];
-            A[i] = num;
+        
+        function shuffle_array(A) {
+            for(let i=A.length-1; i>=0; i--) {
+                let pos = getRandomBetween(0, i);
+                let num = A[pos];
+                A[pos] = A[i];
+                A[i] = num;
+            }
+            return A;
         }
-        return A;
-    }
-
-	function getRandomBetween(min, max) {
-		return Math.floor(Math.random()*(max-min+1)) + min;
-	}
+        
+        function getRandomBetween(min, max) {
+            return Math.floor(Math.random()*(max-min+1)) + min;
+        }
     </script>
 </body>
 </html>
