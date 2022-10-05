@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex. 1</title>
+</head>
+
+<body>
+    <script>
+        let base = 9;
+
+        console.log('*'.repeat(base));
+
+        let j = 1;
+        for(let i = base-4; i >= 1; i=i-2) {
+            console.log(' '.repeat(j) + '*' + ' '.repeat(i) + '*');
+            j++;
+        }
+
+        console.log(' '.repeat(j) + '*');
+        
+    </script>
+</body>
+
+</html>  

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex. 1</title>
+</head>
+
+<body>
+    <script>
+        const CAMBIO = 60;
+        const SEGS_MEDIA_NOCHE = 24*CAMBIO*CAMBIO;
+        let horas = prompt('Horas:');
+        let min = prompt('Minutos:');
+
+        let seg = (horas*CAMBIO*CAMBIO) + (min*CAMBIO);
+
+        let res = SEGS_MEDIA_NOCHE - seg;
+
+        console.log(res);
+    </script>
+</body>
+
+</html> 

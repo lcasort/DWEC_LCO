@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex. 1</title>
+</head>
+
+<body>
+    <script>
+        let base = 9;
+        let espaciosInicio = Math.floor(base / 2);
+
+        console.log(' '.repeat(espaciosInicio) + '*');
+        espaciosInicio--;
+
+        for(let i = 1; i < base-2; i=i+2) {
+            console.log(' '.repeat(espaciosInicio) + '*' + ' '.repeat(i) + '*');
+            espaciosInicio--;
+        }
+
+        console.log('*'.repeat(base));
+    </script>
+</body>
+
+</html>
