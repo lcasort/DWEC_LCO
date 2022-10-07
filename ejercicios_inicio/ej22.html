@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex. 22</title>
+</head>
+
+<body>
+    <script>
+        let baseImponible = parseFloat(prompt('Introduzca la base imponible:'));
+        let tipoIVA = prompt('Introduzca el tipo de IVA (general, reducido o superreducido):');
+        let codigoPromocional = prompt('Introduzca el código promocional (nopro, mitad, menos5, 5porc:');
+
+        let iva = null;
+        switch(tipoIVA) {
+            case 'general':
+                iva = 21;
+                break;
+            case 'reducido':
+                iva = 10;
+                break;
+            case 'superreducido':
+                iva = 4;
+                break;
+            default:
+                break;
+        }
+
+        let ivaAlPrecio = (iva*baseImponible)/100;
+        let precioConIva = ivaAlPrecio + baseImponible;
+
+        let descuento = null;
+        switch(codigoPromocional) {
+            case 'nopro':
+                descuento = 0;
+                break;
+            case 'mitad':
+                descuento = -(precioConIva*50)/100;
+                break;
+            case 'menos5':
+                descuento = -5;
+                break;
+            case '5porc':
+                descuento = -(precioConIva*5)/100;
+                break;
+            default:
+                break;
+        }
+
+        let total = precioConIva + descuento;
+
+        console.log(`Base imponible ${baseImponible}`);
+        console.log(`IVA (${iva}%) ${ivaAlPrecio}`);
+        console.log(`Precio con IVA ${precioConIva}`);
+        console.log(`Cód. promo. (${codigoPromocional}): ${descuento}`);
+        console.log(`TOTAL: ${total}`);
+    </script>
+</body>
+
+</html> 
