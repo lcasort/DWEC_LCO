@@ -9,15 +9,33 @@
 
 <body>
     <script>
-        const PRIMER_EXAMEN = 0.4;
-        const SEGUNDO_EXAMEN = 0.6;
+        const DIAS_DE_LA_SEMANA = ['LUNES', 'MARTES', 'MIERCOLES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'SABADO', 'DOMINGO'];
+        let day = prompt('Dime el día de la semana:');
 
-        let notaPrimerExamen = prompt('Introduce la nota del primer examen:');
-        let notaObjetivo = prompt('¿Qué nota quieres sacar en el trimestre?');
-
-        let notaNecesaria = (notaObjetivo - notaPrimerExamen*PRIMER_EXAMEN)/SEGUNDO_EXAMEN;
-
-        console.log(`Para tener un ${notaObjetivo} en el trimestre necesitas sacar un ${notaNecesaria} en el segundo examen.`);
+        if(DIAS_DE_LA_SEMANA.includes(day.toUpperCase)) {
+            switch (day.toUpperCase) {
+            case 'LUNES':
+                console.log('DAW');
+                break;
+            case 'MARTES':
+                console.log('DWES');
+                break;
+            case 'MIERCOLES': case 'MIÉRCOLES':
+                console.log('DWEC');
+                break;
+            case 'JUEVES':
+                console.log('DWES');
+                break;
+            case 'VIERNES':
+                console.log('HLC');
+                break;
+            default:
+                console.log('Este día no tienes clases.');
+            }
+        } else {
+            console.log('Introduce un día de la semana.');
+        }
+        
     </script>
 </body>
 
