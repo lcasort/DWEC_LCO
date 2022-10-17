@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex. 23</title>
+</head>
+
+<body>
+    <script>
+        const  MINIMO_APROBADO = 5;
+
+       let primerExamen = parseInt(prompt('Nota del primer control:'));
+       let segundoExamen = parseInt(prompt('Nota del segundo control:'));
+
+       let media = (primerExamen + segundoExamen) / 2;
+
+       if (media>=MINIMO_APROBADO) {
+        console.log(`Tu nota de DWEC es ${media}`);
+       } else {
+        let notaRecuperacion = prompt(`¿Cuál ha sido el resultado de la recuperación? (apto/no apto):`);
+        switch (notaRecuperacion) {
+            case 'apto':
+                console.log(`Tu nota de DWEC es 5`);
+                break;
+            case 'no apto':
+                console.log(`Tu nota de DWEC es ${media}`);
+                break;
+            default:
+                console.log(`Resultado introducido no válido.`);
+        }
+       }
+    </script>
+</body>
+
+</html>
