@@ -6,8 +6,14 @@ function createInterval()
 {
     if(!intvCreated) {
         delay = prompt('Introduce el intervalo:');
-        idIntv = setInterval(escribirMensaje, delay);
-        intvCreated = true;
+        if (!isNaN(delay)) {
+            delay = parseInt(delay);
+            idIntv = setInterval(escribirMensaje, delay);
+            intvCreated = true;
+        } else {
+            console.log('Valor introducido no válido.');
+            delay = 2000;
+        }
     } else {
         console.log('Intervalo ya creado.');
     }
