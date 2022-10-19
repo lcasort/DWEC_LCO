@@ -1,37 +1,28 @@
-let nuevaVentana = null;
-let ventanaCreada = false;
+let idTemp = null;
+let timeoutCreated = false;
 
-function crearNueva() {
-  if (!ventanaCreada) {
-    nuevaVentana = window.open("https://www.debian.org", "", "height=400,width=800");
-    ventanaCreada = true;
-  } else {
-    console.log("Ventana ya creada!!!");
-  }
+function createTimeout()
+{
+    if(!timeoutCreated) {
+        idTemp = setTimeout(alertaEjecucionTemp, 10000);
+        timeoutCreated = true;
+    } else {
+        console.log('Timeout ya creado.');
+    }
 }
 
-function cerrarNueva() {
-  if (ventanaCreada) {
-    nuevaVentana.close();
-    nuevaVentana = null;
-    ventanaCreada = false;
-  } else {
-    console.log("Ventana aun no creada!!!");
-  }
+function alertaEjecucionTemp()
+{
+    alert('Se ha ejecutado el temporizador de 10 segundos');
 }
 
-function enfocar() {
-  if (ventanaCreada) {
-    nuevaVentana.focus();
-  } else {
-    console.log("Ventana aun no creada!!!");
-  }
-}
-
-function desenfocar() {
-  if (ventanaCreada) {
-    nuevaVentana.blur();
-  } else {
-    console.log("Ventana aun no creada!!!");
-  }
+function deleteTimeout()
+{
+    if(timeoutCreated) {
+        clearTimeout(idTemp);
+        idTemp = null;
+        timeoutCreated = false;
+    } else {
+        console.log('Timeout aún no creado.');
+    }
 }
