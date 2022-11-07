@@ -138,7 +138,7 @@ function printShoppingCart() {
         }
     } else {
         throw new Error('No tienes soporte para LocalStorage!');
-    }    
+    }
 
     ////////////////////////TERMINA EL CÓDIGO DEL ALUMNADO/////////////////////////////
 }
