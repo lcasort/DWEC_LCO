@@ -67,10 +67,14 @@ function addProduct(product) {
 
     // Cuando sí se añada un producto al localStorage, imprime el carrito de la compra
     // para ayudarte a depurar (y déjalo en el código)
-    if(!localStorage.getItem(product.id)) {
-        localStorage.setItem(product.id, JSON.stringify(product));
-        printShoppingCart();
-        return true;
+    if(localStorage) {
+        if(!localStorage.getItem(product.id)) {
+            localStorage.setItem(product.id, JSON.stringify(product));
+            printShoppingCart();
+            return true;
+        }
+    } else {
+        throw new Error('No tienes soporte para LocalStorage!');
     }
 
     return false;
@@ -91,10 +95,14 @@ function removeProduct(product) {
     
     // Cuando sí se elimina un producto del localStorage, imprime el carrito de la compra
     // para ayudarte a depurar (y déjalo en el código)
-    if(localStorage.getItem(product.id)) {
-        localStorage.removeItem(product.id);
-        printShoppingCart();
-        return true;
+    if(localStorage) {
+        if(localStorage.getItem(product.id)) {
+            localStorage.removeItem(product.id);
+            printShoppingCart();
+            return true;
+        }
+    } else {
+        throw new Error('No tienes soporte para LocalStorage!');
     }
 
     return false;
@@ -115,18 +123,22 @@ function removeProduct(product) {
 function printShoppingCart() {
     ////////////////////////COMIENZA EL CÓDIGO DEL ALUMNADO/////////////////////////////
 
-    console.log('----------Productos del carrito:');
-    for(let key in localStorage) {
-        let values = JSON.parse(localStorage.getItem(key));
-        if(values) {
-            console.log('-- Id: ' + key);
-            console.log('  Nombre: ' + values['name']);
-            let precio = values['price'].toString().replaceAll('.',',') + '€';
-            console.log('  Precio: ' + precio);
-            console.log('  Vendido por: ' + values.soldBy);
-            console.log('  Número de unidades que quedan: ' + values.units);
+    if(localStorage) {
+        console.log('----------Productos del carrito:');
+        for(let key in localStorage) {
+            let values = JSON.parse(localStorage.getItem(key));
+            if(values) {
+                console.log('-- Id: ' + key);
+                console.log('  Nombre: ' + values['name']);
+                let precio = values['price'].toString().replaceAll('.',',') + '€';
+                console.log('  Precio: ' + precio);
+                console.log('  Vendido por: ' + values.soldBy);
+                console.log('  Número de unidades que quedan: ' + values.units);
+            }
         }
-    }
+    } else {
+        throw new Error('No tienes soporte para LocalStorage!');
+    }    
 
     ////////////////////////TERMINA EL CÓDIGO DEL ALUMNADO/////////////////////////////
 }
@@ -139,8 +151,12 @@ function printShoppingCart() {
 function isProductStored(product) {
     ////////////////////////COMIENZA EL CÓDIGO DEL ALUMNADO/////////////////////////////
     
-    if(localStorage.getItem(product.id)) {
-        return true;
+    if(localStorage) {
+        if(localStorage.getItem(product.id)) {
+            return true;
+        }
+    } else {
+        throw new Error('No tienes soporte para LocalStorage!');
     }
 
     return false;
