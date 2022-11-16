@@ -46,11 +46,14 @@ function checkCookie(name)
  */
 function getAndDecodeCookies()
 {
+    let m = new Map();
     let array = document.cookie.split(';');
-    let value = array.map(cookie => 
-        ({[cookie.split('=')[0].trim()]: decodeURIComponent(cookie.split('=')[1])}));
+    
+    array.forEach(cookie => {
+        m.set(cookie.split('=')[0].trim(), decodeURIComponent(cookie.split('=')[1]));
+    });
 
-    console.log(value);
+    console.log(m);
 }
 
 /**
