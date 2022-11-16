@@ -1,8 +1,8 @@
 /**
  * Función que crea una nueva cookie, codificando su valor.
- * @param {*} name : nombre de la cookie.
- * @param {*} value : valor de la cookie.
- * @param {*} daysToLive : número de dias que va a tener de vida la cookie.
+ * @param {string} name : nombre de la cookie.
+ * @param {string} value : valor de la cookie.
+ * @param {number} daysToLive : número de dias que va a tener de vida la cookie.
  */
 function setAndEncodeCookie(name, value, daysToLive=null)
 {
@@ -17,7 +17,7 @@ function setAndEncodeCookie(name, value, daysToLive=null)
 /**
  * Función que obtiene una cookie dada y la decodifica, devolviendo su valor.
  * Si la cookie no existe, devuelve null.
- * @param {*} name : nombre de la cookie.
+ * @param {string} name : nombre de la cookie.
  */
 function getAndDecodeCookie(name)
 {
@@ -30,7 +30,7 @@ function getAndDecodeCookie(name)
 /**
  * Función que comprueba si una cookie existe, en cuyo caso devuelve true.
  * En caso contrario devuelve false.
- * @param {*} name 
+ * @param {string} name 
  */
 function checkCookie(name)
 {
