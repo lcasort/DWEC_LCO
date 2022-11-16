@@ -6,7 +6,7 @@
  */
 function setAndEncodeCookie(name, value, daysToLive=null)
 {
-    if(daysToLive!=null) {
+    if(daysToLive) {
         const maxAge = daysToLive*24*60*60;
         document.cookie = `${name}=${encodeURIComponent(value)};max-age=${maxAge}`;
     } else {
@@ -62,7 +62,7 @@ function getValues()
     const value = document.querySelector('#value').value;
     const daysToLive = document.querySelector('#daysToLive').value;
 
-    if(name!='' && value!='') {
+    if(name && value) {
         if(daysToLive>0) {
             setAndEncodeCookie(name, value, daysToLive);
         } else {
