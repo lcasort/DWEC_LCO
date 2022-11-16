@@ -8,9 +8,7 @@ function filter(array, callback)
     let filteredArray = [];
 
     array.forEach(x => {
-        if(callback(x)) {
-            filteredArray.push(x);
-        }
+        if(callback(x)) { filteredArray.push(x); }
     });
 
     return filteredArray;
