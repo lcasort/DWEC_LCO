@@ -16,25 +16,6 @@ function filter(array, callback)
 
 /**
  * Función para devolver el primer elemento que cumpla la condición dada.
- * @param {array} array 
- * @param {function} callback 
- * @returns 
- */
-function find(array, callback)
-{
-    let res = null;
-
-    for(let i=0; i<array.length && res===null; i++) {
-        if(callback(array[i])) {
-            res = array[i];
-        }
-    }
-
-    return res;
-}
-
-/**
- * Función para devolver el primer elemento que cumpla la condición dada.
  * @param {function} callback
  * @param {array} array 
  * @returns 
@@ -85,9 +66,7 @@ function firstRepeated(elem, index, array)
     let res = false;
 
     for(let i=index+1; i<array.length && !res; i++) {
-        if(elem === array[i]) {
-            res = true;
-        }
+        res = elem === array[i];
     }
 
     return res;
