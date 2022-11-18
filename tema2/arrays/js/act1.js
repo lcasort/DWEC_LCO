@@ -64,3 +64,8 @@ const elems = [30,2,3,8,24];
 console.log(filter(a,isGreaterEqualThan10));
 console.log(find(a,isGreaterEqualThan10));
 console.log(filter(elems,isEven));
+console.log(filter(elems, function (num)
+{
+    return num%2 === 0;
+}));
+console.log(filter(elems, num => num%2 === 0));
