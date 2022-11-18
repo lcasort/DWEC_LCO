@@ -43,8 +43,8 @@ function find(array, callback)
 {
     let res = null;
 
-    for(let i=0; i<array.length && res===null; i++) {
-        if(callback(array[i], i+1, array)) {
+    for(let i=0; i<array.length && !res; i++) {
+        if(callback(array[i], i, array)) {
             res = array[i];
         }
     }
@@ -84,7 +84,7 @@ function firstRepeated(elem, index, array)
 {
     let res = false;
 
-    for(let i=index; i<array.length && res===false; i++) {
+    for(let i=index+1; i<array.length && !res; i++) {
         if(elem === array[i]) {
             res = true;
         }
