@@ -35,8 +35,7 @@ function find(array, callback)
 
 /**
  * Función para devolver el primer elemento que cumpla la condición dada.
- * @param {function} callback 
- * @param {number} index 
+ * @param {function} callback
  * @param {array} array 
  * @returns 
  */
