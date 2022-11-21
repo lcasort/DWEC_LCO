@@ -1,15 +1,11 @@
-/*
-Actividad 1. Propiedades y métodos.
-Utiliza las propiedades y métodos del objeto Math para realizar las siguientes tareas. Sigue el
-índice de W3Schools:
-1. Obtén el resultado de multiplicar el número PI por el número E.
-2. Obtén el valor absoluto de -9,87.
-3. Redondea 1,2 al entero más alto.
-4. Redondea 1,8 al entero más bajo.
-5. Redondea 2.51 al entero más próximo.
-6. Obtén el mayor número de los siguientes 6, 7, 4, 10, 10.1
-7. Obtén el menor número de los siguientes 6, 7, 4, 3.9, 10
-8. Obtén un valor aleatorio entre 100 y 200 (Puedes consultar MDN)
-9. Obtén el valor de 2 elevado a 16.
-10. Obtén el valor de la raíz cuadrada de 16.
-*/
+console.log('PI x E = ' + Math.PI*Math.E);
+console.log('Valor absoluto de -9.87: ' + Math.abs(-9.87));
+console.log('Redondeo de 1.2 al entero más alto: ' + Math.ceil(1.2));
+console.log('Redondeo de 1.8 al entero más bajo: ' + Math.floor(1.8));
+console.log('Redondeo de 2.51 al entero más próximo: ' + Math.round(2.51));
+console.log('Mayor número de los siguientes 6, 7, 4, 10, 10.1: ' + Math.max(6,7,4,10,10.1));
+const nums = [6,7,4,3.9,10];
+console.log('Menor número de los siguientes 6, 7, 4, 3.9, 10: ' + Math.min(...nums));
+console.log('Valor aleatorio entre 100 y 200: ' + Math.random() * (200 - 100) + 100);
+console.log('2 elevado a 16: ' + Math.pow(2,6));
+console.log('Raíz cuadrada de 16: ' + Math.sqrt(16));

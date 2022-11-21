@@ -15,3 +15,16 @@ siguientes actividades sobre el objeto Date:
 11. Una cadena legible de la hora en formato local (toLocaleTimeString)
 12. Una cadena legible de la fecha y la hora en formato local (toLocaleString)
 */
+const date = new Date(1999,5,17,21,05,0,30);
+console.log('Día del mes: ' + date.getDate());
+console.log('Día de la semana: ' + date.getDay());
+console.log('Año: ' + date.getFullYear());
+console.log('Hora: ' + date.getHours());
+console.log('Milisegundos: ' + date.getMilliseconds());
+console.log('Minutos: ' + date.getMinutes());
+console.log('Mes del año: ' + date.getMonth());
+console.log('Minutos: ' + date.getSeconds());
+console.log('Cadena legible de la fecha: ' + date.toDateString());
+console.log('Cadena legible de la fecha en formato local: ' + date.toLocaleDateString());
+console.log('Cadena legible de la hora en formato local: ' + date.toLocaleTimeString());
+console.log('Cadena legible de la fecha y la hora en formato local: ' + date.toLocaleString());
