@@ -1,0 +1,104 @@
+.slidecontainer {
+    width: 100%;
+    background-color: lightgoldenrodyellow;
+}
+
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+
+.slider:hover {
+    opacity: 1;
+}
+
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+.rangeValue {
+    text-align: left;
+    font-family: Arial Black;
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 30px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.4), 0px -1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    font-size: 50px;
+    padding-left: 0px;
+}
+
+.rangeTitle {
+    padding-left: 0px;
+    font-size: 30px;
+}
+
+.minMax {
+    padding-left: 0px;
+    font-size: 15px;
+}
+
+.innerSlide {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #c0411b;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 12px;
+    width: 200px;
+    transition: all 0.3s;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .button:hover {
+    background-color: #f4511e;
+  }
+
+  .buttonContainer {
+    width: 100%;
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;    
+  }

@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1 class="rangeValue title">Administración de ventanas</h1>
+    <div class="slidecontainer">
+        <p class="rangeValue rangeTitle">Ancho</p>
+        <div class="innerSlide">
+            <p class="rangeValue minMax">100</p>
+            <input type="range" min="100" max="1000" value="300" class="slider" id="rangeWidth">
+            <p class="rangeValue minMax">1000</p>
+        </div>
+        <p class="rangeValue">Valor: <span id="widthValue">300</span></p>
+    </div>
+    <div class="slidecontainer">
+        <p class="rangeValue rangeTitle">Alto</p>
+        <div class="innerSlide">
+            <p class="rangeValue minMax"></p>
+            <p class="rangeValue minMax">100</p>
+            <input type="range" min="100" max="1000" value="300" class="slider" id="rangeHeight">
+            <p class="rangeValue minMax">1000</p>
+        </div>
+        <p class="rangeValue">Valor: <span id="heightValue">300</span></p>
+    </div>
+    <div class="buttonContainer">
+        <div class="buttonContainer">
+            <a class="button new" href="#" target="_blank">Crear nueva ventana</a>
+            <a class="button resize" href="#" target="_blank">Redimensionar ventana</a>
+            <a class="button close" href="#" target="_blank">Cerrar ventana</a>
+        </div>
+
+    </div>
+    <script src="js/ignorar.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
