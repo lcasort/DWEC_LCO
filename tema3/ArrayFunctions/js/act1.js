@@ -100,6 +100,22 @@ function double(elem)
     return elem*2;
 }
 
+function every(array, callback)
+{
+    let res = true;
+
+    for(let i=0; i<array.length && res; i++) {
+        res = callback(array[i], i, array);
+    }
+
+    return res;
+}
+
+function mayor18(elem)
+{
+    return elem.edad >= 18;
+}
+
 
 
 
@@ -108,6 +124,58 @@ const a = [10,30,8,7,50,2];
 const elems = [30,2,3,8,24];
 const els = [3,6,9,7,7,4,9];
 const arr = [1,2,3,4,5,6,7,8,9,10];
+const personas = [
+    p1 = {
+        nombre: 'Pepe',
+        edad: 12
+    },
+
+    p2 = {
+        nombre: 'Ana',
+        edad: 23
+    },
+
+    p3 = {
+        nombre: 'Lucía',
+        edad: 22
+    },
+
+    p4 = {
+        nombre: 'Jose',
+        edad: 17
+    },
+
+    p5 = {
+        nombre: 'Chiara',
+        edad: 18
+    }
+];
+const personas2 = [
+    p1 = {
+        nombre: 'Pepe',
+        edad: 21
+    },
+
+    p2 = {
+        nombre: 'Ana',
+        edad: 23
+    },
+
+    p3 = {
+        nombre: 'Lucía',
+        edad: 22
+    },
+
+    p4 = {
+        nombre: 'Jose',
+        edad: 50
+    },
+
+    p5 = {
+        nombre: 'Chiara',
+        edad: 48
+    }
+];
 
 // MAIN
 console.log(filter(a,isGreaterEqualThan10));
@@ -118,3 +186,5 @@ console.log(filter(elems, num => num%2 === 0));
 console.log(find(els,firstRepeated));
 console.log(map(arr,double));
 console.log(map(arr,num => num/2));
+console.log(every(personas,mayor18));
+console.log(every(personas2,mayor18));
