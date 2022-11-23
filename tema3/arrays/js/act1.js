@@ -83,9 +83,9 @@ function map(array, callback)
 {
     let res = [];
 
-    array.forEach(x => {
-        res.push(callback(x));
-    });
+    for(let i=0; i<array.length; i++) {
+        res.push(callback(array[i],i,array));
+    }
 
     return res;
 }
@@ -95,9 +95,9 @@ function map(array, callback)
  * @param {number} num 
  * @returns 
  */
-function double(num)
+function double(elem, index, array)
 {
-    return num*2;
+    return elem*2;
 }
 
 
