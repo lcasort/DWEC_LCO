@@ -209,3 +209,5 @@ console.log(map(arr,double));
 console.log(map(arr,num => num/2));
 console.log(every(personas,mayorEdad));
 console.log(every(personas2,mayorEdad));
+console.log(personas.filter(p => mayorEdad(p)));
+console.log(personas.filter(p => mayorEdad(p)).find(p => p.nombre==='Ana'));
