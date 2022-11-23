@@ -95,7 +95,7 @@ function map(array, callback)
  * @param {number} num 
  * @returns 
  */
-function double(elem, index, array)
+function double(elem)
 {
     return elem*2;
 }
