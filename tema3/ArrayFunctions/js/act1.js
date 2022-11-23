@@ -100,6 +100,13 @@ function double(elem)
     return elem*2;
 }
 
+/**
+ * Función que determina si todos los elementos en el array satisfacen una
+ * condición.
+ * @param {array} array 
+ * @param {function} callback 
+ * @returns 
+ */
 function every(array, callback)
 {
     let res = true;
@@ -111,7 +118,13 @@ function every(array, callback)
     return res;
 }
 
-function mayor18(elem)
+/**
+ * Función que recibe un objeto de tipo persona y devuelve true si es mayor de
+ * edad o false en caso contrario.
+ * @param {*} elem 
+ * @returns 
+ */
+function mayorEdad(elem)
 {
     return elem.edad >= 18;
 }
@@ -119,7 +132,11 @@ function mayor18(elem)
 
 
 
-// CONSTANTS
+/*
+--------------------------------------------------------------------------------
+                                 CONSTANTS
+--------------------------------------------------------------------------------
+*/
 const a = [10,30,8,7,50,2];
 const elems = [30,2,3,8,24];
 const els = [3,6,9,7,7,4,9];
@@ -177,7 +194,11 @@ const personas2 = [
     }
 ];
 
-// MAIN
+/*
+--------------------------------------------------------------------------------
+                                    MAIN
+--------------------------------------------------------------------------------
+*/
 console.log(filter(a,isGreaterEqualThan10));
 console.log(find(a,isGreaterEqualThan10));
 console.log(filter(elems,isEven));
@@ -186,5 +207,5 @@ console.log(filter(elems, num => num%2 === 0));
 console.log(find(els,firstRepeated));
 console.log(map(arr,double));
 console.log(map(arr,num => num/2));
-console.log(every(personas,mayor18));
-console.log(every(personas2,mayor18));
+console.log(every(personas,mayorEdad));
+console.log(every(personas2,mayorEdad));
