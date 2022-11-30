@@ -57,17 +57,25 @@ class Coche {
         this.#modelo = modelo;
     }
 
-    get marchaActual() {
-        return this.#marchaActual;
-    }
-
     get marchas() {
         return this.#marchas;
+    }
+
+    get marchaActual() {
+        return this.#marchaActual;
     }
 
     set marchaActual(marcha) {
         if(marcha instanceof this.#marchas) {
             this.#marchaActual = marcha;
+        }
+    }
+
+    cambiarMarcha(marcha) {
+        if(marcha instanceof this.#marchas) {
+            this.#marchaActual = marcha;
+        } else {
+            throw new Error('La marcha introducida no existe.');
         }
     }
 }
