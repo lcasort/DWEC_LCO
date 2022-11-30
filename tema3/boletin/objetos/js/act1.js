@@ -25,10 +25,6 @@ a) Creación inicial de clase e instancias.
     • Al inicializar el objeto la marcha actual será parado.
     • En el método cambiarMarcha, si la marcha a la que se pretende cambiar no existe se debe
     lanzar una excepción.
-    a.2) Crea dos instancias de la clase Coche: un Tesla ModelS y un Mazda 3i. Cambia la marcha del
-    Tesla a primera y la del Mazda a marcha atrás.
-    a.3) Muestra por consola el fabricante, el modelo y la marcha en la que se encuentran ambos
-    coches.
 */ 
 class Coche {
     #fabricante;
@@ -79,3 +75,14 @@ class Coche {
         }
     }
 }
+
+/*
+    a.2) Crea dos instancias de la clase Coche: un Tesla ModelS y un Mazda 3i. Cambia la marcha del
+    Tesla a primera y la del Mazda a marcha atrás.
+*/
+
+
+/*
+    a.3) Muestra por consola el fabricante, el modelo y la marcha en la que se encuentran ambos
+    coches.
+*/
