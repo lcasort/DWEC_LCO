@@ -2,11 +2,7 @@
 Actividad 1. Objetos de tipo Coche.
 Realiza los siguientes apartados tomando como referencia el artículo JavaScript Classes de
 W3Schools.
-    b) Métodos get y set.
-    Añade métodos get y set a la clase para cada uno de sus atributos.
-    c) Métodos estáticos.
-    Añade un método estático a la clase Coche para determinar si dos coches son iguales. Dos coches se
-    consideran iguales si tienen el mismo fabricante y modelo.
+    
     d) Herencia.
         d.1) Crea una clase padre Vehículo con un único atributo pasajeros. Añade un método get y set para
         el atributo.
@@ -37,6 +33,14 @@ class Coche {
         this.#modelo = modelo;
     }
 
+    cambiarMarcha(marcha) {
+        this.marchaActual = marcha;
+    }
+
+    /*
+    b) Métodos get y set.
+    Añade métodos get y set a la clase para cada uno de sus atributos.
+    */
     get fabricante() {
         return this.#fabricante;
     }
@@ -62,17 +66,29 @@ class Coche {
     }
 
     set marchaActual(marcha) {
-        if(marcha instanceof this.#marchas) {
-            this.#marchaActual = marcha;
-        }
-    }
-
-    cambiarMarcha(marcha) {
-        if(marcha instanceof this.#marchas) {
+        if(this.#marchas[marcha]) {
             this.#marchaActual = marcha;
         } else {
             throw new Error('La marcha introducida no existe.');
         }
+    }
+
+    /*
+    c) Métodos estáticos.
+    Añade un método estático a la clase Coche para determinar si dos coches son iguales. Dos coches se
+    consideran iguales si tienen el mismo fabricante y modelo.
+    */
+    static equals(cocheA, cocheB) {
+        let res = false;
+        if(cocheA instanceof Coche && cocheB instanceof Coche) {
+            if(cocheA.fabricante === cocheB.fabricante &&
+            cocheA.modelo === cocheB.modelo) {
+                res = true;
+            }
+        } else {
+            throw new Error('La marcha introducida no existe.');
+        }
+        return res;
     }
 }
 
@@ -80,9 +96,15 @@ class Coche {
     a.2) Crea dos instancias de la clase Coche: un Tesla ModelS y un Mazda 3i. Cambia la marcha del
     Tesla a primera y la del Mazda a marcha atrás.
 */
+let tesla = new Coche('Tesla', 'Models');
+let mazda = new Coche('Mazda', '3i');
 
+tesla.cambiarMarcha('1');
+mazda.cambiarMarcha(mazda.marchas.R);
 
 /*
     a.3) Muestra por consola el fabricante, el modelo y la marcha en la que se encuentran ambos
     coches.
 */
+console.log(`Coche: [fabricante = ${tesla.fabricante}, modelo = ${tesla.modelo}, marchaActual = ${tesla.marchaActual}]`);
+console.log(`Coche: [fabricante = ${mazda.fabricante}, modelo = ${mazda.modelo}, marchaActual = ${mazda.marchaActual}]`);
