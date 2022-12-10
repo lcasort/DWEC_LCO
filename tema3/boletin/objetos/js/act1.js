@@ -2,16 +2,29 @@
 Actividad 1. Objetos de tipo Coche.
 Realiza los siguientes apartados tomando como referencia el artículo JavaScript Classes de
 W3Schools.
-    
+*/
+
+
+/*
     d) Herencia.
         d.1) Crea una clase padre Vehículo con un único atributo pasajeros. Añade un método get y set para
         el atributo.
-        d.2) Haz que Coche herede de Vehículo.
-        d.3) Crea un nuevo Coche, añádele 3 pasajeros y muestra el número de pasajeros por consola.
-    f) Representación textual de objetos.
-    Redefine el método toString para obtener una cadena con el siguiente formato al imprimir un objeto
-    Coche: fabricante :::: modelo :::: pasajeros
 */
+class Vehiculo {
+    #pasajeros;
+
+    constructor (pasajeros) {
+        this.#pasajeros = pasajeros;
+    }
+
+    get pasajeros() {
+        return this.#pasajeros;
+    }
+
+    set pasajeros(pasajeros) {
+        this.#pasajeros = pasajeros;
+    }
+}
 /*
 a) Creación inicial de clase e instancias.
     a.1) Crea una clase Coche con los atributos fabricante, modelo, marchas y marchaActual y con el
@@ -21,14 +34,17 @@ a) Creación inicial de clase e instancias.
     • Al inicializar el objeto la marcha actual será parado.
     • En el método cambiarMarcha, si la marcha a la que se pretende cambiar no existe se debe
     lanzar una excepción.
-*/ 
-class Coche {
+    
+    d.2) Haz que Coche herede de Vehículo.
+*/
+class Coche extends Vehiculo {
     #fabricante;
     #modelo;
     #marchas = {P:'Parado', 1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', R:'R'};
     #marchaActual = this.#marchas.P;
 
-    constructor (fabricante, modelo) {
+    constructor (pasajeros, fabricante, modelo) {
+        super(pasajeros);
         this.#fabricante = fabricante;
         this.#modelo = modelo;
     }
@@ -90,14 +106,23 @@ class Coche {
         }
         return res;
     }
+
+    /*
+    f) Representación textual de objetos.
+    Redefine el método toString para obtener una cadena con el siguiente formato al imprimir un objeto
+    Coche: fabricante :::: modelo :::: pasajeros
+    */
+   toString() {
+    return `${this.#fabricante} :::: ${this.#modelo} :::: ${this.pasajeros}`;
+   }
 }
 
 /*
     a.2) Crea dos instancias de la clase Coche: un Tesla ModelS y un Mazda 3i. Cambia la marcha del
     Tesla a primera y la del Mazda a marcha atrás.
 */
-let tesla = new Coche('Tesla', 'Models');
-let mazda = new Coche('Mazda', '3i');
+let tesla = new Coche(null, 'Tesla', 'Models');
+let mazda = new Coche(null, 'Mazda', '3i');
 
 tesla.cambiarMarcha('1');
 mazda.cambiarMarcha(mazda.marchas.R);
@@ -108,3 +133,10 @@ mazda.cambiarMarcha(mazda.marchas.R);
 */
 console.log(`Coche: [fabricante = ${tesla.fabricante}, modelo = ${tesla.modelo}, marchaActual = ${tesla.marchaActual}]`);
 console.log(`Coche: [fabricante = ${mazda.fabricante}, modelo = ${mazda.modelo}, marchaActual = ${mazda.marchaActual}]`);
+
+/*
+    d.3) Crea un nuevo Coche, añádele 3 pasajeros y muestra el número de pasajeros por consola.
+*/
+let c = new Coche(3, 'Tesla', 'Models');
+console.log(`Número de pasajeros: ${c.pasajeros}`);
+console.log(c.toString());
