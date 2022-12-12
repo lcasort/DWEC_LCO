@@ -52,17 +52,13 @@ class Carta
 
     incluirLineas() {
         for (let i = 0; i < this.#filas; i++) {
-            for (let j = 0; j < this.#columnas; j++) {
-                if((j > 0 || j < this.#columnas-1) &&
-                    (i === 0 || i === this.#filas-1)) {
-                    this.#aCarta[i][j] = '&#x2500;';
-                } else if((i > 0 || i < this.#filas-1) &&
-                            (j === 0 || j === this.#columnas-1)) {
-                    this.#aCarta[i][j] = '&#x2502;';
-                }
-                
+            if((i > 0 || i < this.#filas-1)) {
+                this.#aCarta[i][0] = '&#x2502;';
+                this.#aCarta[i][this.#columnas-1] = '&#x2502;';
             }
         }
+        this.#aCarta[0].fill('&#x2500;', 1, this.#columnas-1);
+        this.#aCarta[this.#filas-1].fill('&#x2500;', 1, this.#columnas-1);
         this.#aCarta[0][0] = '&#x250C;';
         this.#aCarta[0][this.#columnas-1] = '&#x2510;';
         this.#aCarta[this.#filas-1][0] = '&#x2514;';
