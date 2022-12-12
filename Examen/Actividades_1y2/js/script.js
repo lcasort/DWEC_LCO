@@ -1,0 +1,14 @@
+///////////////////////////// FUNCIONES QUE DEBES IMPLEMENTAR /////////////////////////
+
+// ACTIVIDAD 1:
+// Clase Producto
+
+
+//Clase ArticuloFactura
+
+
+//ACTIVIDAD 2:
+
+
+
+///////////////////////////// FIN FUNCIONES QUE DEBES IMPLEMENTAR /////////////////////////
