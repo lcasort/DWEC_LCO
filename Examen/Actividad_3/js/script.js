@@ -17,9 +17,47 @@ const factura = [
 
 // ACTIVIDAD 3:
 // Apartado 1:
+/**
+ * Función que recibe un array de objetos y devuelve los productos cuyo precio
+ * sea superior a 2€ ordenados de manera ascendente.
+ * @param {Array} factura 
+ * @returns Array
+ */
+function obtenerCarosOrdenadosPorCantidad(factura)
+{
+    return factura.filter(prod => prod.precio>2.)
+            .sort((a,b) => {
+                return a.cantidad - b.cantidad;
+            });
+}
+// Llamamos a la función y guardamos el array que devuelve en res.
+const res = obtenerCarosOrdenadosPorCantidad(factura);
+// Imprimimos el resultado por pantalla.
+res.forEach(prod => {
+    console.log(`id: ${prod.id}, descripcion: ${prod.descripcion}, precio: ${prod.precio}, cantidad: ${prod.cantidad}`);
+});
 
 
 // Apartado 2:
-
+/**
+ * Función que recibe un array de objetos y un número n, y ordena los productos
+ * según su precio de manera descendente y devuelve los n primeros, es decir,
+ * los n productos más caros.
+ * @param {Array} factura 
+ * @param {Number} num 
+ * @returns Array
+ */
+function obtenerNMasCaros(factura, n)
+{
+    return factura.sort((a,b) => {
+        return b.precio - a.precio;
+    }).slice(0,n);
+}
+// Llamamos a la función y guardamos el array que devuelve en res2.
+const res2 = obtenerNMasCaros(factura, 4);
+// Imprimimos el resultado por pantalla.
+res2.forEach(prod => {
+    console.log(`id: ${prod.id}, descripcion: ${prod.descripcion}, precio: ${prod.precio}, cantidad: ${prod.cantidad}`);
+});
 
 ///////////////////////////// AQUÍ TERMINA TU CÓDIGO /////////////////////////
