@@ -62,9 +62,12 @@
         document.getElementById('parrafo1').onclick = cambiarContenidoYEstilo;
 
         function cambiarContenidoYEstilo() {
+            alert("Se lanza el evento.");
             // Si llamamos a la función arriba con (), this es Window.
             this.innerHTML = 'Cambiando el contenido.';
             document.getElementById('parrafo1').style.color = 'green';
+            // Para que no se ejecute más de una vez.
+            this.onclick = null;
         }
 
     </script>
