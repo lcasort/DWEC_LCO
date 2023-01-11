@@ -7,6 +7,68 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- En línea: en el mismo html. -->
+    <!--
+    <p id="parrafo1" onclick="this.innerHTML='Ha cambiado.'"
+    onmouseover="document.getElementById('parrafo1').style.background='red'"
+    onmouseout="this.style.background='white'">
+        Ejemplo eventos en linea.
+    </p>
+
+    <p id="parrafo2" onclick="callback(this);">
+        Ejemplo función callback.
+    </p>
+
+    <a href="https://www.debian.org" onclick="informar(); return false;">Debian</a>
+    <br>
+    <a href="https://www.debian.org" onclick="return informar2();">Debian 2</a>
+    <br>
+    -->
+
+    <!--
+    <script type="text/javascript">
+
+        function callback(elem)
+        {
+            elem.innerHTML = 'Cambio hecho desde la función callback.';
+        }
+
+        function informar()
+        {
+            alert("Tratando evento.");
+        }
+
+        function informar2()
+        {
+            return confirm("Tratando evento.");
+        }
+
+    </script>
+    -->
+
+
+
+    <!-- Tradicional. -->
+    <p id="parrafo1">
+        Ejemplo eventos en linea.
+    </p>
+
+    <p id="parrafo2">
+        Ejemplo función callback.
+    </p>
+
+    <script type="text/javascript">
+
+        document.getElementById('parrafo1').onclick = cambiarContenidoYEstilo;
+
+        function cambiarContenidoYEstilo() {
+            // Si llamamos a la función arriba con (), this es Window.
+            this.innerHTML = 'Cambiando el contenido.';
+            document.getElementById('parrafo1').style.color = 'green';
+        }
+
+    </script>
+
     <!-- Referecias a los archivos JS. -->
     <script type="text/javascript" src="js/script.js"></script>
 </body>
