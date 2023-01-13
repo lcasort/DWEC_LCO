@@ -100,6 +100,14 @@
         Ejemplo función callback.
     </p>
 
+    <p id="parrafo3">
+        Ejemplo parrafo 3.
+    </p>
+
+    <p id="parrafo4">
+        Ejemplo parrafo 4.
+    </p>
+
     <a href="https://www.google.com" id="enlace">Vamos a Google</a>
 
     <script type="text/javascript">
@@ -135,10 +143,40 @@
         document.getElementById("enlace").addEventListener("click", function(e) {
             // Para que no haga lo que debe de hacer por defecto.
             e.preventDefault();
-            
+
             alert("holaaaa");
             this.innerText = "No nos vamos a google.";
         }, false);
+
+        ////////////////////////////////////////////////////////////////////////
+
+        document.getElementById("parrafo3").addEventListener("mouseover", manejador, false);
+        document.getElementById("parrafo3").addEventListener("mouseout", manejador, false);
+
+        function manejador(e) {
+            switch(e.type) {
+                case "mouseover":
+                    this.style.background = 'red';
+                    break;
+                case "mouseout":
+                    this.style.background = 'transparent';
+                    break;
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+
+        document.getElementById("parrafo3").addEventListener("mouseover", manejador2, false);
+        document.getElementById("parrafo4").addEventListener("mouseout", manejador2, false);
+
+        function manejador2(e) {
+            if(e.target.id === "parrafo3") {
+                e.target.innerText = "Texto cambiado al parrafo 3.";
+            } else if(e.target.id === "parrafo4") {
+                e.target.innerText = "Texto cambiado al parrafo 4.";
+            }
+        }
+        
     </script>
 
 

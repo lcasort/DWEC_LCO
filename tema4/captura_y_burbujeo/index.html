@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="rangeValue title">Ejemplo eventos</h1>
+    <form name="formulario" id="formulario" action="/action.php">
+        <label class="rangeValue" for="models">Elige el modelo de eventos:</label>
+        <select id="models" name="models">
+            <option value="burbujeo" selected>Burbujeo</option>
+            <option value="captura">Captura</option>
+        </select>
+    </form>
+
+    <div id="abuelo" class="contenedorAbuelo">
+        <p class="rangeValue rangeTitle">Contenedor abuelo</p>
+        <div id="padre" class="contenedorPadre">
+            <p class="rangeValue rangeTitle">Contenedor padre</p>
+            <div id="hijo" class="contenedorHijo">
+                <p class="rangeValue rangeTitle">Contenedor hijo</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
