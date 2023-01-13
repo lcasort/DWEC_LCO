@@ -5,6 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!--
+    <script type="text/javascript">
+        window.onload = function() {
+
+        document.getElementById('parrafo1').onclick = cambiarContenidoYEstilo;
+
+        function cambiarContenidoYEstilo() {
+            alert("Se lanza el evento.");
+            // Si llamamos a la función arriba con (), this es Window.
+            this.innerHTML = 'Cambiando el contenido.';
+            document.getElementById('parrafo1').style.color = 'green';
+            // Para que no se ejecute más de una vez.
+            this.onclick = null;
+        }
+    </script>
+    }
+    -->
 </head>
 <body>
     <!-- En línea: en el mismo html. -->
@@ -49,6 +66,7 @@
 
 
     <!-- Tradicional. -->
+    <!--
     <p id="parrafo1">
         Ejemplo eventos en linea.
     </p>
@@ -71,6 +89,58 @@
         }
 
     </script>
+    -->
+
+    <!-- W3C (recomendado). -->
+    <p id="parrafo1">
+        Ejemplo eventos en linea.
+    </p>
+
+    <p id="parrafo2">
+        Ejemplo función callback.
+    </p>
+
+    <a href="https://www.google.com" id="enlace">Vamos a Google</a>
+
+    <script type="text/javascript">
+        // Añadimos un escuchador de eventos (event listener) a un elemento.
+        document.getElementById('parrafo1').addEventListener("click", callback, false);
+        document.getElementById('parrafo1').addEventListener("click", function() {
+            alert("aaaaaaaaaaaa");
+        }, false);
+        document.getElementById('parrafo1').addEventListener("click", callback3, false);
+        document.getElementById('parrafo1').addEventListener("mouseover", callback4, false);
+
+        document.getElementById('parrafo2').addEventListener("click", callback, false);
+        document.getElementById('parrafo2').addEventListener("click", callback3, false);
+        document.getElementById('parrafo2').addEventListener("mouseover", callback4, false);
+
+        function callback() {
+            alert("k dise k ase");
+            this.removeEventListener("click", callback);
+        }
+        function callback2() {
+            alert("aaaaaaaaaaaa");
+        }
+        function callback3() {
+            this.style.color = 'red';
+        }
+        function callback4() {
+            this.style.color = 'white';
+            this.style.background = 'black';
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+
+        document.getElementById("enlace").addEventListener("click", function(e) {
+            // Para que no haga lo que debe de hacer por defecto.
+            e.preventDefault();
+            
+            alert("holaaaa");
+            this.innerText = "No nos vamos a google.";
+        }, false);
+    </script>
+
 
     <!-- Referecias a los archivos JS. -->
     <script type="text/javascript" src="js/script.js"></script>
