@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="formulario0001">
+        <form  class="contenedor" action="prueba.php" name="formulario" id="formulario" method="POST">
+            <h1>Formulario de registro</h1>
+            <label for="email">Email <span class="requerido">*</span>:</label><br>
+            <input type="email" placeholder="nombre@ejemplo.com" id="email" name="email" required><br>
+            <label for="pass">Password  <span class="requerido">*</span>:</label><br>
+            <input type="text" pattern=".*\d.*" id="pass" name="pass" title="Debe incluir al menos un número" required><br>
+            <label class="aclaracion" for="pass">El password debe contener al menos un número</label><br>
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" id="nombre" name="nombre" maxlength="10"><br>
+            <label for="edad">Edad:</label><br>
+            <input type="number" id="edad" min="18" max="100" name="edad"><br>
+            <label class="aclaracion" for="pass">Introduce un número entre 18 y 100</label><br>
+
+            <fieldset>
+                <legend>Género:</legend>
+                <input class = "radio" type="radio" id="hombre" name="genero" value="hombre">
+                <label for="hombre">Hombre</label>
+                <input class = "radio" type="radio" id="mujer" name="genero" value="mujer">
+                <label for="mujer">Mujer</label>
+            </fieldset>
+            
+            <label for="pais">País:</label><br>
+            <select id="pais" name="pais">
+                <option value="df" selected>Selecciona un país</option>
+                <option value="pt">Portugal</option>
+                <option value="fr">Francia</option>
+                <option value="uk">Reino Unido</option>
+                <option value="de">Alemania</option>
+                <option value="es">España</option>
+            </select>
+
+            <fieldset>
+                <legend>Intereses:</legend>
+                <input type="checkbox" id="vehicle1" name="interes1" value="coches">
+                <label for="vehicle1">Coches</label>
+                <input type="checkbox" id="vehicle2" name="interes2" value="motos">
+                <label for="vehicle2">Motos</label>
+                <input type="checkbox" id="vehicle3" name="interes3" value="barcos">
+                <label for="vehicle3">Barcos</label>
+            </fieldset>
+            <input type="submit" value="Enviar" formnovalidate="formnovalidate">
+            <input type="submit" value="Enviar validando HTML5">
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
