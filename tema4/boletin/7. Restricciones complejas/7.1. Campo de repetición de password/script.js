@@ -3,6 +3,10 @@ const CLASE_ERROR_CAMPO = "error";
 const CLASE_ERROR_MENSAJE = "campoAnadir";
 
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////// ACTIVIDAD 1 /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 // Validamos cuando los elementos pierden el foco.
 document.getElementById("email").addEventListener("blur", validarCampoEvento, false);
 document.getElementById("pass").addEventListener("blur", validarCampoEvento, false);
@@ -12,17 +16,29 @@ document.getElementById("edad").addEventListener("blur", validarCampoEvento, fal
 // Prohibimos que nos envíe el formulario a no ser que los campos sean válidos.
 document.getElementById("formulario").addEventListener("submit", validarFormulario, false);
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////// ACTIVIDAD 2 /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 //
 document.getElementById("email").addEventListener("invalid", notificarErroresEvento, false);
 document.getElementById("pass").addEventListener("invalid", notificarErroresEvento, false);
 document.getElementById("nombre").addEventListener("invalid", notificarErroresEvento, false);
 document.getElementById("edad").addEventListener("invalid", notificarErroresEvento, false);
 
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////// ACTIVIDAD 2 /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
 //
 document.getElementById("email").addEventListener("input", revisarErroresEvento, false);
 document.getElementById("pass").addEventListener("input", revisarErroresEvento, false);
 document.getElementById("nombre").addEventListener("input", revisarErroresEvento, false);
 document.getElementById("edad").addEventListener("input", revisarErroresEvento, false);
+
 
 
 /**
@@ -82,6 +98,9 @@ function notificarErroresEvento(e)
     if(campo.validity.patternMismatch) {
         messages.push('El campo debe contener al menos un número.');
     }
+    if(campo.validity.customError) {
+        messages.push(campo.validationMessage);
+    }
 
     mostrarMensajesErrorEn(messages, campo);
 }
@@ -135,4 +154,34 @@ function eliminarErrores(campo) {
         campo.parentNode.removeChild(document.getElementById(`${campo.name}_error`));
     }
     */
+}
+
+
+
+//******************************* EJERCICIO 7 ********************************//
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
+
+document.getElementById("reppass").addEventListener("blur", comprobarCoincidenContrasenas, false);
+document.getElementById("reppass").addEventListener("invalid", notificarErroresEvento, false);
+document.getElementById("reppass").addEventListener("input", revisarErroresCustomEvento, false);
+
+function comprobarCoincidenContrasenas(e) {
+    let msg = "";
+    const campo = e.target;
+
+    if(document.getElementById("reppass").value != document.getElementById("pass").value) {
+        msg = "Las contraseñas no coinciden.";
+    }
+
+    campo.setCustomValidity(msg);
+
+    return validarCampo(campo);
+}
+
+function revisarErroresCustomEvento(e) {
+    const campo = e.target;
+    if(comprobarCoincidenContrasenas) {
+        eliminarErrores(campo);
+    }
 }
