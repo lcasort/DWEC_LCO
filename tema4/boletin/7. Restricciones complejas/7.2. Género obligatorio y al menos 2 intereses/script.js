@@ -68,9 +68,11 @@ function validarCampo(campo)
 function validarFormulario(e)
 {
     let formValido = validarCampo(document.getElementById('email'));
-    formValido = document.getElementById('pass') && formValido;
-    formValido = document.getElementById('nombre') && formValido;
-    formValido = document.getElementById('edad') && formValido;
+    formValido = validarCampo(document.getElementById('pass')) && formValido;
+    formValido = validarCampo(document.getElementById('nombre')) && formValido;
+    formValido = validarCampo(document.getElementById('edad')) && formValido;
+    formValido = validarCampo(document.getElementById('reppass')) && formValido;
+    formValido = checkRadio() && formValido;
     if(!formValido) {
         e.preventDefault();
         console.log('Formulario no válido.');
@@ -167,24 +169,24 @@ function eliminarErrores(campo) {
 document.getElementById("reppass").addEventListener("blur", comprobarCoincidenContrasenas, false);
 document.getElementById("reppass").addEventListener("invalid", notificarErroresEvento, false);
 document.getElementById("reppass").addEventListener("input", revisarErroresCustomEvento, false);
+document.getElementById("pass").addEventListener("input", revisarErroresCustomEvento, false);
 
 function comprobarCoincidenContrasenas(e) {
     let msg = "";
-    const campo = e.target;
-
     if(document.getElementById("reppass").value != document.getElementById("pass").value) {
         msg = "Las contraseñas no coinciden.";
     }
 
-    campo.setCustomValidity(msg);
+    document.getElementById("reppass").setCustomValidity(msg);
 
-    return validarCampo(campo);
+    return validarCampo(document.getElementById("reppass"));
 }
 
 function revisarErroresCustomEvento(e) {
     const campo = e.target;
     if(comprobarCoincidenContrasenas) {
-        eliminarErrores(campo);
+        eliminarErrores(document.getElementById("reppass"));
+        eliminarErrores(document.getElementById("pass"));
     }
 }
 
@@ -195,9 +197,10 @@ function revisarErroresCustomEvento(e) {
 // intereses.                                                                 //
 ////////////////////////////////////////////////////////////////////////////////
 
-document.formulario.addEventListener("submit", checkRadio, false);
-
-// document.formulario.genero.addEventListener("input", revisarErroresCustomEvento, false);
+const radios = document.querySelectorAll('.radio');
+for (let i = 0; i < radios.length; i++) {
+    radios[i].addEventListener("input", checkRadio, false);
+}
 
 function checkRadio(e) {
     let msg = "";
@@ -216,10 +219,7 @@ function checkRadio(e) {
 
     radios[radios.length-1].addEventListener("invalid", notificarErroresRadio, false);
 
-    const res = validarCampo(radios[radios.length-1]);
-    if(!res) {
-        e.preventDefault();
-    }
+    return validarCampo(radios[radios.length-1]);
 }
 
 function notificarErroresRadio(e) {
