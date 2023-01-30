@@ -7,35 +7,14 @@ crearListeners();
 
 function crearListeners() {
 
+    // Frenamos la validación HTML5 del formulario.
+    document.getElementById("formulario").setAttribute("novalidate", true);
+
     document.getElementById("nombre").addEventListener("blur", validarNombreEvento, false);
-
     document.getElementById("nombre").addEventListener("invalid", notificarErrorNombreEvento, false);
-
     document.getElementById("nombre").addEventListener("input", revisarErroresEvento, false);
-    
 
-    // Incluimos eventos para todos los checkboxes de los cursos
-    const checkCursos = document.querySelectorAll("input[type='checkbox'");
-    for(const checkCurso of checkCursos) {
-        checkCurso.addEventListener("input", revisarErroresInteresesEvento, false);
-        checkCurso.addEventListener("invalid", notificarErroresInteresesEvento, false);
-    }
-
-    // document.getElementById("formulario").addEventListener("submit", validarFormularioEvento, false);
 }
-
-/* function validarFormularioEvento(e) {
-    let formValido = validarCampo(document.getElementById("nombre"));
-    formValido = validarCampo(document.getElementById("pass")) && formValido;
-    formValido = validarCampo(document.getElementById("email")) && formValido;
-    formValido = validarCampo(document.getElementById("telefono")) && formValido;
-    formValido = validarCampo(document.getElementById("telefonoAlt")) && formValido;
-    formValido = validarInteresesSeleccionados() && formValido;
-    
-    if(!formValido) {
-        e.preventDefault();
-    }
-} */
 
 function validarNombreEvento(e) {
     const nombre = e.target;
@@ -102,8 +81,10 @@ function mostrarMensajesErrorEn(mensajes, campo) {
     let contenedorMensajes = document.createElement("div");
     // Añadimos la clase para el texto
     contenedorMensajes.classList.add(CLASE_ERROR_MENSAJES);
-    // Añadimos el id del div para después poder eliminarlo con facilidad
-    contenedorMensajes.id = `${campo.name}-${CLASE_ERROR_CAMPO}`;
+    
+    // Para darle accesibilidad al formulario.
+    contenedorMensajes.setAttribute("aria-describedby", campo.id);
+
     for(let mensaje of mensajes) {
         let parrafo = document.createElement("p");
         parrafo.textContent = mensaje;
