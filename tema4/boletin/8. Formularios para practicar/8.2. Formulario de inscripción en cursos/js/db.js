@@ -1,11 +1,11 @@
 export const db = {
     "ccaa": [
         {
-            "label": "AndalucÃ­a",
+            "label": "Andalucí­a",
             "code": "01"
           },
           {
-            "label": "AragÃ³n",
+            "label": "Aragón",
             "code": "02"
           },
           {
@@ -25,7 +25,7 @@ export const db = {
             "code": "06"
           },
           {
-            "label": "Castilla y LeÃ³n",
+            "label": "Castilla y León",
             "code": "07"
           },
           {
@@ -33,7 +33,7 @@ export const db = {
             "code": "08"
           },
           {
-            "label": "CataluÅ„a",
+            "label": "Cataluña",
             "code": "09"
           },
           {
@@ -53,7 +53,7 @@ export const db = {
             "code": "13"
           },
           {
-            "label": "Murcia, RegiÃ³n de",
+            "label": "Murcia, Región de",
             "code": "14"
           },
           {
@@ -61,7 +61,7 @@ export const db = {
             "code": "15"
           },
           {
-            "label": "PaÃ­s Vasco",
+            "label": "Paí­s Vasco",
             "code": "16"
           },
           {
@@ -81,17 +81,17 @@ export const db = {
         {
             "ccaa_code": "01",
             "code": "04",
-            "label": "AlmerÃ­a"
+            "label": "Almerí­a"
           },
           {
             "ccaa_code": "01",
             "code": "11",
-            "label": "CÃ¡diz"
+            "label": "Cádiz"
           },
           {
             "ccaa_code": "01",
             "code": "14",
-            "label": "CÃ³rdoba"
+            "label": "Córdoba"
           },
           {
             "ccaa_code": "01",
@@ -106,12 +106,12 @@ export const db = {
           {
             "ccaa_code": "01",
             "code": "23",
-            "label": "JaÃ©n"
+            "label": "Jaén"
           },
           {
             "ccaa_code": "01",
             "code": "29",
-            "label": "MÃ¡laga"
+            "label": "Málaga"
           },
           {
             "ccaa_code": "01",
@@ -161,7 +161,7 @@ export const db = {
           {
             "ccaa_code": "07",
             "code": "05",
-            "label": "Ãvila"
+            "label": "Ávila"
           },
           {
             "ccaa_code": "07",
@@ -171,7 +171,7 @@ export const db = {
           {
             "ccaa_code": "07",
             "code": "24",
-            "label": "LeÃ³n"
+            "label": "León"
           },
           {
             "ccaa_code": "07",
@@ -256,12 +256,12 @@ export const db = {
           {
             "ccaa_code": "10",
             "code": "12",
-            "label": "CastellÃ³n/CastellÃ³"
+            "label": "Castellón/Castelló"
           },
           {
             "ccaa_code": "10",
             "code": "46",
-            "label": "Valencia/ValÃ¨ncia"
+            "label": "Valencia/Valí¨ncia"
           },
           {
             "ccaa_code": "11",
@@ -271,12 +271,12 @@ export const db = {
           {
             "ccaa_code": "11",
             "code": "10",
-            "label": "CÃ¡ceres"
+            "label": "Cáceres"
           },
           {
             "ccaa_code": "12",
             "code": "15",
-            "label": "CoruÃ±a, A"
+            "label": "Coruña, A"
           },
           {
             "ccaa_code": "12",
@@ -311,7 +311,7 @@ export const db = {
           {
             "ccaa_code": "16",
             "code": "01",
-            "label": "Araba/Ãlava"
+            "label": "Araba/Álava"
           },
           {
             "ccaa_code": "16",

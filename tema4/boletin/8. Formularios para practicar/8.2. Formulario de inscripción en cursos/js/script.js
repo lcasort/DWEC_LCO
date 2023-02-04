@@ -1,3 +1,6 @@
+import { db } from "./db.js";
+
+
 //////////////////////////////////// CONSTS ////////////////////////////////////
 const ERROR_CLASS = 'error';
 const ERROR_MESSAGE_CLASS = 'inputError'
@@ -7,6 +10,44 @@ const ERROR_MESSAGE_CLASS = 'inputError'
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// MAIN /////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+function addCCAA()
+{
+    let ccaa = document.querySelector('#comaut');
+
+    for (let i = 0; i < db['ccaa'].length; i++) {
+        const op = document.createElement('option');
+        op.value = db['ccaa'][i]['code'];
+        op.innerHTML = db['ccaa'][i]['label'];
+        ccaa.appendChild(op);
+    }
+
+    ccaa.options[0].setAttribute('selected', 'selected');
+}
+
+addCCAA();
+
+function addProvs()
+{
+    const ccaaCode = document.querySelector('#comaut').selectedOptions[0].value;
+
+    let provs = document.querySelector('#prov');
+    provs.innerHTML = '';
+    console.log(provs);
+
+    for (let i = 0; i < db['provincias'].length; i++) {
+        if(db['provincias'][i]['ccaa_code'] === ccaaCode) {
+            const op = document.createElement('option');
+            op.value = db['provincias'][i]['code'];
+            op.innerHTML = db['provincias'][i]['label'];
+            provs.appendChild(op);
+        }
+    }
+
+    provs.options[0].setAttribute('selected', 'selected');
+}
+
+addProvs();
+
 /**
  * Método para inicializar los liteners.
  */
@@ -16,20 +57,19 @@ function initializeListeners()
     document.querySelector('.form').addEventListener('submit', validateForm,
     false);
 
+    // Añadimos el listener para cuando cambiemos la CCAA seleccionada.
+    document.querySelector('#comaut').addEventListener('change', addProvs, false);
+
     // Añadimos los listeners para cuando hacemos el blur de un campo.
     document.querySelector('.name').addEventListener('blur', validateInputEvent,
     false);
     document.querySelector('.surnames').addEventListener('blur',
     validateInputEvent, false);
-    document.querySelector('.bday').addEventListener('blur', validateInputEvent,
-    false);
 
     // Añadimos los listeners para cuando un campo es invalid.
     document.querySelector('.name').addEventListener('invalid', showErrors,
     false);
     document.querySelector('.surnames').addEventListener('invalid', showErrors,
-    false);
-    document.querySelector('.bday').addEventListener('invalid', showErrors,
     false);
 
     // Añadimos los listeners para cuando modificamos un campo.
@@ -37,16 +77,6 @@ function initializeListeners()
     false);
     document.querySelector('.surnames').addEventListener('input',
     checkValidation, false);
-    document.querySelector('.bday').addEventListener('input', checkValidation,
-    false);
-
-    // Hacemos lo mismo para cada campo de tipo radio.
-    const r = document.querySelectorAll('.children');
-    for (let i = 0; i < r.length; i++) {
-        r[i].addEventListener('blur', checkCustomValidationEvent, false);
-        r[i].addEventListener('invalid', showErrors, false);
-        r[i].addEventListener('input', recheckCustomValidation, false);   
-    }
 }
 
 initializeListeners();

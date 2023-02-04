@@ -1,19 +1,20 @@
 <!--
     Implementa un formulario con los siguientes campos y restricciones. Los
-    mensajes de error se deben mostrar justo ENCIMA del campo.
-
-     Campo Nombre. Obligatorio. Acepta valores entre 8 y 15 caracteres de
-    longitud.
-     Campo Apellidos. Obligatorio. Acepta valores entre 8 y 30 caracteres de
-    longitud.
-     Campo Web personal. Sólo permite direcciones url válidas.
-     Campo Edad. Cuyo valor sólo admite números entre 18 y 60.
-     Campo Fecha de nacimiento. Obligatorio. Solo acepta valores de fecha con
-    formato DD/MM/AAAA.
-     Campo Ocupación. Obligatorio. Tipo select con opciones “desempleado”,
-    “en activo” y “jubilado”.
-     Campo Hijos. Obligatorio. Tipo radio con opciones “sí” y “no”.
-     Campo Intereses. Tipo checkbox con opciones “cine”, “música” y “teatro”.
+    mensajes de error se mostrarán al inicio del formulario.
+     Campo Nombre. Obligatorio. Acepta valores entre 8 y 15 caracteres de longitud.
+     Campo Apellidos. Obligatorio. Acepta valores entre 8 y 30 caracteres de longitud.
+     Campo email. Sólo admite direcciones de correo válidas.
+     Campo Comunidad autónoma. Tipo select con las comunidades autónomas de España.
+     Campo Provincia. Tipo select con las provincias de la comunidad autónoma seleccionada.
+     Campo Cursos. Tipo checkbox con opciones “Introducción a HTML5”, “Introducción a
+    CSS3”, “Introducción a JavaScript”, “HTML5 avanzado”, “CSS3 avanzado” y “JavaScript
+    avanzado”.
+     Campo Precio Total. Campo dinámico que se actualiza con la suma de los precios de los
+    cursos marcados en el campo anterior. Los cursos de introducción tienen un precio de 100€ y
+    los cursos avanzados de 150€. Si se seleccionan dos o más cursos se obtiene un descuento del
+    20%.
+     Campo Forma de pago. Tipo radio con opciones “Tarjeta de débito o crédito”, “PayPal” y
+    “Transferencia bancaria”.
 -->
 
 <!DOCTYPE html>
@@ -41,49 +42,61 @@
                 <label for="web">Web personal</label>
                 <input type="url" id="web" name="web" class="web" placeholder="https://example.com" pattern="https://.*">
             </div>
-            <!-- Campo edad. -->
+            <!-- Campo comunidad autónoma. -->
             <div>
-                <label for="age">Edad</label>
-                <input type="number" id="age" name="age" class="age" min="18" max="60">
+                <label for="comaut">Comunidad Autónoma</label>
+                <select name="comaut" id="comaut" required>
+                </select>
             </div>
-            <!-- Campo fecha de nacimiento. -->
+            <!-- Campo provincia. -->
             <div>
-                <label for="bday">Día de nacimiento</label>
-                <input type="text" id="bday" name="bday" class="bday" pattern="^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$" placeholder="DD/MM/YYYY" required>
+                <label for="prov">Provincia</label>
+                <select name="prov" id="prov" required>
+                </select>
             </div>
-            <!-- Campo ocupación. -->
-            <label for="job">Edad</label>
-            <select name="job" id="job" required>
-                <option value="desempleado">Desempleado</option>
-                <option value="en activo">En activo</option>
-                <option value="jubilado">Jubilado</option>
-            </select>
-            <!-- Campo hijos. -->
-            <fieldset>
-                <legend>Hijos</legend>
+            <!-- Campo cursos. -->
+            <div>
+                <fieldset>
+                    <legend>Cursos</legend>
+                
+                    <input type="checkbox" id="introduccion_html5" name="introduccion_html5">
+                    <label for="introduccion_html5">Introducción a HTML5</label>
+                    <input type="checkbox" id="introduccion_css3" name="introduccion_css3">
+                    <label for="introduccion_css3">Introducción a CSS3</label>
+                    <input type="checkbox" id="introduccion_js" name="introduccion_js">
+                    <label for="introduccion_js">Introducción a JavaScript</label>
+                    <input type="checkbox" id="html5_avanzado" name="html5_avanzado">
+                    <label for="html5_avanzado">HTML5 avanzado</label>
+                    <input type="checkbox" id="css3_avanzado" name="css3_avanzado">
+                    <label for="css3_avanzado">CSS3 avanzado</label>
+                    <input type="checkbox" id="js_avanzado" name="js_avanzado">
+                    <label for="js_avanzado">JavaScript avanzado</label>
+                </fieldset>
+            </div>
+            <!-- Campo precio total. -->
+            <div>
 
-                <input type="radio" id="si" name="children" class="children" value="si" required>
-                <label for="si">Sí</label>
-                <input type="radio" id="no" name="children" class="children" value="no">
-                <label for="no">No</label>
-            </fieldset>
-            <!-- Campo intereses. -->
-            <fieldset>
-                <legend>Intereses</legend>
-            
-                <input type="checkbox" id="cine" name="cine">
-                <label for="cine">Cine</label>
-                <input type="checkbox" id="musica" name="musica">
-                <label for="musica">Música</label>
-                <input type="checkbox" id="teatro" name="teatro">
-                <label for="teatro">Teatro</label>
-            </fieldset>
+            </div>            
+            <!-- Campo forma de pago. -->
+            <div>
+                <fieldset>
+                    <legend>Forma de pago</legend>
+    
+                    <input type="radio" id="tarjeta" name="payment" class="payment" value="tarjeta" required>
+                    <label for="tarjeta">Tarjeta de débito o crédito</label>
+                    <input type="radio" id="paypal" name="payment" class="payment" value="paypal">
+                    <label for="paypal">PayPal</label>
+                    <input type="radio" id="transferencia" name="payment" class="payment" value="transferencia">
+                    <label for="transferencia">Transferencia bancaria</label>
+                </fieldset>
+            </div>
 
             <!-- Submit. -->
             <input type="submit" value="Enviar" formnovalidate="formnovalidate">
         </form>
 
         <!-- Importamos los ficheros JS. -->
-        <script src="js/script.js"></script>
+        <script type="module" src="js/db.js"></script>
+        <script type="module" src="js/script.js"></script>
     </body>
 </html>
