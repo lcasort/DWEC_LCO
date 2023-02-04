@@ -1,15 +1,20 @@
 import { db } from "./db.js";
 
 
+
 //////////////////////////////////// CONSTS ////////////////////////////////////
 const ERROR_CLASS = 'error';
 const ERROR_MESSAGE_CLASS = 'inputError'
 ////////////////////////////////////////////////////////////////////////////////
 
 
+
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// MAIN /////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+/**
+ * Método que añade las comunidades autónomas.
+ */
 function addCCAA()
 {
     let ccaa = document.querySelector('#comaut');
@@ -24,8 +29,10 @@ function addCCAA()
     ccaa.options[0].setAttribute('selected', 'selected');
 }
 
-addCCAA();
 
+/**
+ * Método que añade las provincias al select.
+ */
 function addProvs()
 {
     const ccaaCode = document.querySelector('#comaut').selectedOptions[0].value;
@@ -46,7 +53,6 @@ function addProvs()
     provs.options[0].setAttribute('selected', 'selected');
 }
 
-addProvs();
 
 /**
  * Método para inicializar los liteners.
@@ -79,8 +85,12 @@ function initializeListeners()
     checkValidation, false);
 }
 
+
+addCCAA();
+addProvs();
 initializeListeners();
 ////////////////////////////////////////////////////////////////////////////////
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -123,7 +133,8 @@ function validateInputEvent(e)
 }
 
 
-function validateInput(input) {
+function validateInput(input)
+{
     deleteErrors(input);
     return input.checkValidity();
 }
@@ -182,11 +193,6 @@ function checkValidation(e)
 }
 
 
-function checkCustomValidationEvent(e) {
-    return checkCustomValidation(e.target);
-}
-
-
 function checkCustomValidation(input)
 {
     let customMsg = '';
@@ -205,15 +211,6 @@ function checkCustomValidation(input)
     radios[radios.length-1].setCustomValidity(customMsg);
 
     return validateInput(radios[radios.length-1]);
-}
-
-
-function recheckCustomValidation(e) {
-    const input = e.target;
-
-    if(checkCustomValidation(input)) {
-        deleteErrors(input);
-    }
 }
 
 
