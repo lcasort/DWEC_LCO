@@ -49,7 +49,7 @@
             <!-- Campo fecha de nacimiento. -->
             <div>
                 <label for="bday">Día de nacimiento</label>
-                <input type="text" id="bday" name="bday" class="bday" pattern="^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$" required>
+                <input type="text" id="bday" name="bday" class="bday" pattern="^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$" placeholder="DD/MM/YYYY" required>
             </div>
             <!-- Campo ocupación. -->
             <label for="job">Edad</label>
@@ -62,9 +62,9 @@
             <fieldset>
                 <legend>Hijos</legend>
 
-                <input type="radio" id="si" name="children" value="si" required>
+                <input type="radio" id="si" name="children" class="children" value="si" required>
                 <label for="si">Sí</label>
-                <input type="radio" id="no" name="children" value="no">
+                <input type="radio" id="no" name="children" class="children" value="no">
                 <label for="no">No</label>
             </fieldset>
             <!-- Campo intereses. -->
@@ -80,7 +80,7 @@
             </fieldset>
 
             <!-- Submit. -->
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Enviar" formnovalidate="formnovalidate">
         </form>
 
         <!-- Importamos los ficheros JS. -->
