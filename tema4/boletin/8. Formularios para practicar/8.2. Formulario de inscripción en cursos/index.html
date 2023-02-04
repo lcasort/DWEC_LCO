@@ -1,0 +1,89 @@
+<!--
+    Implementa un formulario con los siguientes campos y restricciones. Los
+    mensajes de error se deben mostrar justo ENCIMA del campo.
+
+     Campo Nombre. Obligatorio. Acepta valores entre 8 y 15 caracteres de
+    longitud.
+     Campo Apellidos. Obligatorio. Acepta valores entre 8 y 30 caracteres de
+    longitud.
+     Campo Web personal. Sólo permite direcciones url válidas.
+     Campo Edad. Cuyo valor sólo admite números entre 18 y 60.
+     Campo Fecha de nacimiento. Obligatorio. Solo acepta valores de fecha con
+    formato DD/MM/AAAA.
+     Campo Ocupación. Obligatorio. Tipo select con opciones “desempleado”,
+    “en activo” y “jubilado”.
+     Campo Hijos. Obligatorio. Tipo radio con opciones “sí” y “no”.
+     Campo Intereses. Tipo checkbox con opciones “cine”, “música” y “teatro”.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <form id="form" class="form" action="https://www.google.com">
+            <!-- Campo nombre. -->
+            <div>
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" class="name" minlength="8" maxlength="15" required>
+            </div>
+            <!-- Campo apellidos. -->
+            <div>
+                <label for="surnames">Apellidos</label>
+                <input type="text" id="surnames" name="surnames" class="surnames" minlength="8" maxlength="30" required>
+            </div>
+            <!-- Campo web personal. -->
+            <div>
+                <label for="web">Web personal</label>
+                <input type="url" id="web" name="web" class="web" placeholder="https://example.com" pattern="https://.*">
+            </div>
+            <!-- Campo edad. -->
+            <div>
+                <label for="age">Edad</label>
+                <input type="number" id="age" name="age" class="age" min="18" max="60">
+            </div>
+            <!-- Campo fecha de nacimiento. -->
+            <div>
+                <label for="bday">Día de nacimiento</label>
+                <input type="text" id="bday" name="bday" class="bday" pattern="^([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/(\d{4})$" placeholder="DD/MM/YYYY" required>
+            </div>
+            <!-- Campo ocupación. -->
+            <label for="job">Edad</label>
+            <select name="job" id="job" required>
+                <option value="desempleado">Desempleado</option>
+                <option value="en activo">En activo</option>
+                <option value="jubilado">Jubilado</option>
+            </select>
+            <!-- Campo hijos. -->
+            <fieldset>
+                <legend>Hijos</legend>
+
+                <input type="radio" id="si" name="children" class="children" value="si" required>
+                <label for="si">Sí</label>
+                <input type="radio" id="no" name="children" class="children" value="no">
+                <label for="no">No</label>
+            </fieldset>
+            <!-- Campo intereses. -->
+            <fieldset>
+                <legend>Intereses</legend>
+            
+                <input type="checkbox" id="cine" name="cine">
+                <label for="cine">Cine</label>
+                <input type="checkbox" id="musica" name="musica">
+                <label for="musica">Música</label>
+                <input type="checkbox" id="teatro" name="teatro">
+                <label for="teatro">Teatro</label>
+            </fieldset>
+
+            <!-- Submit. -->
+            <input type="submit" value="Enviar" formnovalidate="formnovalidate">
+        </form>
+
+        <!-- Importamos los ficheros JS. -->
+        <script src="js/script.js"></script>
+    </body>
+</html>
