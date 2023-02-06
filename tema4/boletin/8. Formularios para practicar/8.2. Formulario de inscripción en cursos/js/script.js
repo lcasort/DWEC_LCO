@@ -83,6 +83,22 @@ function initializeListeners()
     false);
     document.querySelector('.surnames').addEventListener('input',
     checkValidation, false);
+
+    // Hacemos lo mismo para cada campo de tipo radio.
+    const formaPago = document.querySelectorAll('.payment');
+    for (let i = 0; i < formaPago.length; i++) {
+        formaPago[i].addEventListener('blur', checkCustomValidationEvent, false);
+        formaPago[i].addEventListener('invalid', showErrors, false);
+        formaPago[i].addEventListener('input', recheckCustomValidation, false);   
+    }
+
+    // Hacemos lo mismo para cada campo de tipo checkbox.
+    const cursos = document.querySelectorAll('input[type=checkbox]');
+    for (let i = 0; i < cursos.length; i++) {
+        cursos[i].addEventListener('blur', checkCustomValidationEvent, false);
+        cursos[i].addEventListener('invalid', showErrors, false);
+        cursos[i].addEventListener('input', recheckCustomValidation, false);   
+    }
 }
 
 
@@ -105,11 +121,17 @@ function validateForm(e)
     const requiredInputs = document.querySelectorAll('input[required]');
     let isFormValid = true;
     for (let i = 0; i < requiredInputs.length; i++) {
-        if(requiredInputs[i].attributes['type'].nodeValue === "radio") {
+        if(requiredInputs[i].attributes['type'].nodeValue === "radio" ||
+        requiredInputs[i].attributes['type'].nodeValue === "checkbox") {
             isFormValid = checkCustomValidation(requiredInputs[i]) && isFormValid;
         } else {
             isFormValid = validateInput(requiredInputs[i]) && isFormValid;
         }    
+    }
+
+    const checkbox = document.querySelectorAll('input[type=checkbox]');
+    for (let i = 0; i < checkbox.length; i++) {
+        isFormValid = checkCustomValidation(checkbox[i]) && isFormValid;
     }
 
     if(!isFormValid) {
@@ -149,22 +171,27 @@ function showErrors(e)
     if(input.validity.customError) {
         messages.push(input.validationMessage);
     } else if(input.validity.valueMissing) {
-        messages.push('Este campo no puede estar vacío.');
+        messages.push(input.labels[0].attributes['for'].value.toUpperCase() +
+        ': Este campo no puede estar vacío.');
     }
     if(input.validity.patternMismatch) {
-        messages.push(`Los datos introducidos no siguen el patrón correcto (${input.placeholder}).`);
+        messages.push(input.labels[0].attributes['for'].value.toUpperCase() +
+        `: Los datos introducidos no siguen el patrón correcto (${input.placeholder}).`);
     }
     if(input.validity.tooShort || input.validity.tooLong) {
-        messages.push(`El campo debe tener de ${input.attributes['minlength'].value} a ${input.attributes['maxlength'].value} carácteres.`);
+        messages.push(input.labels[0].attributes['for'].value.toUpperCase() +
+        `: El campo debe tener de ${input.attributes['minlength'].value} a ${input.attributes['maxlength'].value} carácteres.`);
     }
     if(input.validity.rangeUnderflow || input.validity.rangeOverflow) {
-        messages.push(`El campo debe estar entre ${input.min} y ${input.max}.`);
+        messages.push(input.labels[0].attributes['for'].value.toUpperCase() +
+        `: El campo debe estar entre ${input.min} y ${input.max}.`);
     }
     if(input.validity.typeMismatch) {
-        messages.push('El tipo de dato introducido no es el correcto.');
+        messages.push(input.labels[0].attributes['for'].value.toUpperCase() +
+        ': El tipo de dato introducido no es el correcto.');
     }
 
-    showErrorMessagesAt(messages, input);
+    showErrorMessagesAt(messages, document.getElementById('form'));
 }
 
 
@@ -180,7 +207,7 @@ function showErrorMessagesAt(messages, input)
         div.appendChild(p);
     }
 
-    input.parentNode.insertAdjacentElement('afterbegin', div);
+    input.insertAdjacentElement('afterbegin', div);
 }
 
 
@@ -193,24 +220,82 @@ function checkValidation(e)
 }
 
 
+function checkCustomValidationEvent(e) {
+    return checkCustomValidation(e.target);
+}
+
+
 function checkCustomValidation(input)
 {
+    // Guardaremos el mensaje de error en customMsg en caso de que los haya.
     let customMsg = '';
 
-    const query = 'input[type=' + input.attributes['type'].nodeValue + ']';
+    // Guardamos el tipo de input que estamos recibiendo.
+    const type = input.attributes['type'].nodeValue;
+
+    // Inicializamos las variables cont y tot para, en caso de que el input sea
+    // de tipo checkbox, almacenar cuántos son marcados y el precio total a
+    // pagar por esos cursos respectivamente.
+    let cont = 0;
+    let tot = 0;
+
+    // Seleccionamos todos los inputs del tipo correspondiente.
+    const query = 'input[type=' + type + ']';
     const radios = document.querySelectorAll(query);
+    // Iteramos sobre los inputs de dicho tipo.
     for (let i = 0; i < radios.length; i++) {
+        // Si esta marcado...
         if(radios[i].checked) {
+            // Si es de tipo checkbox, incrementamos el contador y el número
+            // total a pagar.
+            if(type === 'checkbox') {
+                cont++;
+                tot = tot + Number.parseInt(radios[i].value);
+            // Si no es de tipo checkbox salimos del bucle.
+            } else {
+                i = radios.length;
+            }
+            // Ponemos el mensaje de error vacío.
             customMsg = '';
-            i = radios.length;
         } else {
-            customMsg = 'Al menos uno de los valores debe ser seleccionado.';
+            // Almacenamos el mensaje de error correspondiente.
+            customMsg = 'FORMA DE PAGO: Al menos uno de los valores debe ser seleccionado.';
         }
     }
 
-    radios[radios.length-1].setCustomValidity(customMsg);
+    // Si el input recibido es de tipo checkbox...
+    if(type === 'checkbox') {
+        // Si se han seleccionado más de dos cursos aplicamos un 20% de
+        // descuento.
+        if(cont >= 2) {
+            tot = tot * 0.8;
+        }
+        // Si se ha seleccionado algún curso, no hay errores. En caso contrario,
+        // indicaremos al usuario que debe seleccionar al menos uno.
+        if(cont > 0) {
+            customMsg = '';
+        } else {
+            customMsg = 'CURSOS: Al menos uno de los valores debe ser seleccionado.';
+        }
 
+        // Mostramos el precio total a pagar por los cursos seleccionados.
+        document.getElementById('label-precio').textContent = tot;
+    }
+
+    // Añadimos los errores al último campo en caso de que los haya.
+    radios[radios.length-1].setCustomValidity(customMsg);
+    
+    // Retornamos true si el campo es válido y false en caso contrario.
     return validateInput(radios[radios.length-1]);
+}
+
+
+function recheckCustomValidation(e) {
+    const input = e.target;
+
+    if(checkCustomValidation(input)) {
+        deleteErrors(input);
+    }
 }
 
 
