@@ -1,0 +1,22 @@
+.callout {
+  border: solid 1px #ff0080;
+  margin: 2px 4px;
+  padding: 2px 6px;
+}
+.code {
+  background: #ccc;
+  margin: 1px 2px;
+  padding: 1px 4px;
+  font-family: monospace;
+}
+
+.newCallout {
+  border: solid 1px green;
+  margin: 2px 4px;
+  padding: 2px 6px;
+}
+
+.destacado {
+  background: #ff0;
+  font-style: italic;
+  }
