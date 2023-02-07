@@ -62,6 +62,8 @@ function initializeListeners()
     // Añadimos el listener para cuando enviamos el formulario.
     document.querySelector('.form').addEventListener('submit', validateForm,
     false);
+    document.querySelector('.form').addEventListener('invalid', showErrors,
+    false);
 
     // Añadimos el listener para cuando cambiemos la CCAA seleccionada.
     document.querySelector('#comaut').addEventListener('change', addProvs, false);
@@ -87,18 +89,14 @@ function initializeListeners()
     // Hacemos lo mismo para cada campo de tipo radio.
     const formaPago = document.querySelectorAll('.payment');
     for (let i = 0; i < formaPago.length; i++) {
-        formaPago[i].addEventListener('blur', checkCustomValidationEvent, false);
-        formaPago[i].addEventListener('invalid', showErrors, false);
-        formaPago[i].addEventListener('input', recheckCustomValidation, false);   
+        formaPago[i].addEventListener('invalid', showErrors, false);   
     }
 
     // Hacemos lo mismo para cada campo de tipo checkbox.
-    const cursos = document.querySelectorAll('input[type=checkbox]');
-    for (let i = 0; i < cursos.length; i++) {
-        cursos[i].addEventListener('blur', checkCustomValidationEvent, false);
-        cursos[i].addEventListener('invalid', showErrors, false);
-        cursos[i].addEventListener('input', recheckCustomValidation, false);   
-    }
+    const ch = document.querySelectorAll('input[type=checkbox]');
+    for (let i = 0; i < ch.length; i++) {
+        ch[i].addEventListener('invalid', showErrors, false);
+    }  
 }
 
 
@@ -118,26 +116,42 @@ initializeListeners();
  */
 function validateForm(e)
 {
+    // Recogemos los inputs que son obligatorios.
     const requiredInputs = document.querySelectorAll('input[required]');
+    // Asumimos que el formulario es correcto en un principio.
     let isFormValid = true;
+    // Iteramos los inputs obligatorios y comprobamos si son o no válidos, de
+    // manera que actualizamos la variable que indica la validez del formulario
+    // en función a estos.
     for (let i = 0; i < requiredInputs.length; i++) {
-        if(requiredInputs[i].attributes['type'].nodeValue === "radio" ||
-        requiredInputs[i].attributes['type'].nodeValue === "checkbox") {
+        if(requiredInputs[i].attributes['type'].nodeValue === "radio") {
             isFormValid = checkCustomValidation(requiredInputs[i]) && isFormValid;
         } else {
             isFormValid = validateInput(requiredInputs[i]) && isFormValid;
         }    
     }
 
+    // Comprobamos que al menos se ha seleccionado un curso y actualizamos la
+    // variable que indica la validez del formulario en función a estos.
     const checkbox = document.querySelectorAll('input[type=checkbox]');
-    for (let i = 0; i < checkbox.length; i++) {
-        isFormValid = checkCustomValidation(checkbox[i]) && isFormValid;
-    }
+    isFormValid = checkCustomValidation(checkbox[0]) && isFormValid;
 
+    // Si el formulario no es válido...
     if(!isFormValid) {
+        // Paramos la redirección del formulario.
         e.preventDefault();
+        // Ponemos el foco en el primer input erróneo.
+        let inputs = document.querySelectorAll('input');
+        for (let i = 0; i < inputs.length; i++) {
+            if(inputs[i].classList.contains(ERROR_CLASS)) {
+                inputs[i].focus();
+                i = inputs.length;
+            }
+        }
+        // Informamos por consola de que el formulario no es válido.
         console.log('Formulario no válido.');
     } else {
+        // Informamos por consola de que el formulario es válido.
         console.log('Formulario válido.');
     }
 }
@@ -155,6 +169,12 @@ function validateInputEvent(e)
 }
 
 
+/**
+ * Método que borra los errores previos de un campo y comprueba la validez de
+ * este.
+ * @param {HTMLInputElement} input 
+ * @returns 
+ */
 function validateInput(input)
 {
     deleteErrors(input);
@@ -162,6 +182,11 @@ function validateInput(input)
 }
 
 
+/**
+ * Método que almacena los errores que tiene el campo del evento lo llama y los
+ * muestra por pantalla.
+ * @param {Event} e 
+ */
 function showErrors(e)
 {
     const input = e.target;
@@ -191,10 +216,15 @@ function showErrors(e)
         ': El tipo de dato introducido no es el correcto.');
     }
 
-    showErrorMessagesAt(messages, document.getElementById('form'));
+    showErrorMessagesAt(messages, input);
 }
 
 
+/**
+ * Método que muestra los errores por pantalla al principio del formulario.
+ * @param {Array} messages 
+ * @param {HTMLInputElement} input 
+ */
 function showErrorMessagesAt(messages, input)
 {
     let div = document.createElement('div');
@@ -207,24 +237,40 @@ function showErrorMessagesAt(messages, input)
         div.appendChild(p);
     }
 
-    input.insertAdjacentElement('afterbegin', div);
+    document.querySelector('.form').insertAdjacentElement('afterbegin', div);
 }
 
 
+/**
+ * Método para revisar la validación del input del evento que lo llama. 
+ * @param {Event} e 
+ */
 function checkValidation(e)
 {
     const input = e.target;
+    // Si el evento es válido, le borramos los errores que tenía.
     if(input.validity.valid) {
         deleteErrors(input);
     }
 }
 
-
+/**
+ * Método que comprueba la validación customizada del input del evento que lo
+ * llama.
+ * @param {Evento} e 
+ * @returns 
+ */
 function checkCustomValidationEvent(e) {
     return checkCustomValidation(e.target);
 }
 
 
+/**
+ * Método que comprueba si el input cumple la validación customizada.
+ * Utilizado para los inputs de tipo checkbox y radio.
+ * @param {HTMLInputElement} input 
+ * @returns 
+ */
 function checkCustomValidation(input)
 {
     // Guardaremos el mensaje de error en customMsg en caso de que los haya.
@@ -283,13 +329,18 @@ function checkCustomValidation(input)
     }
 
     // Añadimos los errores al último campo en caso de que los haya.
-    radios[radios.length-1].setCustomValidity(customMsg);
+    radios[0].setCustomValidity(customMsg);
     
     // Retornamos true si el campo es válido y false en caso contrario.
-    return validateInput(radios[radios.length-1]);
+    return validateInput(radios[0]);
 }
 
 
+/**
+ * Método para revisar la validación customizada del input del evento que lo
+ * llama.
+ * @param {Event} e 
+ */
 function recheckCustomValidation(e) {
     const input = e.target;
 
@@ -299,13 +350,17 @@ function recheckCustomValidation(e) {
 }
 
 
+/**
+ * Método que borra los errores de un campo del formulario.
+ * @param {HTMLInputElement} input 
+ */
 function deleteErrors(input)
 {
     input.classList.remove(ERROR_MESSAGE_CLASS);
     input.classList.remove(ERROR_CLASS);
     const errorMessages = document.getElementById(`${input.name}_error`);
     if(errorMessages) {
-        input.parentNode.removeChild(errorMessages);
+        document.querySelector('.form').removeChild(errorMessages);
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
