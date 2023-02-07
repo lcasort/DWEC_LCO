@@ -30,64 +30,47 @@
             <!-- Campo nombre. -->
             <div>
                 <label for="name">Nombre</label>
-                <input type="text" id="name" name="name" class="name" minlength="8" maxlength="15" required>
+                <input type="text" id="name" name="name" class="name"
+                minlength="8" maxlength="15" required>
             </div>
-            <!-- Campo apellidos. -->
+            <!-- Campo contraseña. -->
             <div>
-                <label for="surnames">Apellidos</label>
-                <input type="text" id="surnames" name="surnames" class="surnames" minlength="8" maxlength="30" required>
+                <label for="psswd">Contraseña</label>
+                <input type="password" id="psswd" name="psswd" class="psswd"
+                minlength="8" pattern="^(?=.*[A-Z])(?=.*[_]).+$" required>
             </div>
-            <!-- Campo web personal. -->
+            <!-- Campo teléfono. -->
             <div>
-                <label for="web">Web personal</label>
-                <input type="url" id="web" name="web" class="web" placeholder="https://example.com" pattern="https://.*">
+                <label for="tlf">Teléfono</label>
+                <input type="text" id="tlf" name="tlf" class="tlf"
+                pattern="^[0-9]{9}$">
             </div>
-            <!-- Campo comunidad autónoma. -->
+            <!-- Campo teléfono alternativo. -->
             <div>
-                <label for="comaut">Comunidad Autónoma</label>
-                <select name="comaut" id="comaut" required>
-                </select>
+                <label for="tlf_alt">Teléfono alternativo</label>
+                <input type="text" id="tlf_alt" name="tlf_alt" class="tlf_alt"
+                pattern="^[0-9]{9}$">
             </div>
-            <!-- Campo provincia. -->
+            <!-- Campo descripción personal. -->
             <div>
-                <label for="prov">Provincia</label>
-                <select name="prov" id="prov" required>
-                </select>
+                <textarea name="textarea" rows="10" cols="50" minlength="400"
+                placeholder="Write something here..."></textarea>
             </div>
-            <!-- Campo cursos. -->
+            <!-- Campo intereses. -->
             <div>
                 <fieldset>
-                    <legend>Cursos</legend>
+                    <legend>Intereses</legend>
                 
-                    <input type="checkbox" id="introduccion_html5" name="introduccion_html5" value="100">
-                    <label for="introduccion_html5">Introducción a HTML5</label>
-                    <input type="checkbox" id="introduccion_css3" name="introduccion_css3" value="100">
-                    <label for="introduccion_css3">Introducción a CSS3</label>
-                    <input type="checkbox" id="introduccion_js" name="introduccion_js" value="100">
-                    <label for="introduccion_js">Introducción a JavaScript</label>
-                    <input type="checkbox" id="html5_avanzado" name="html5_avanzado" value="150">
-                    <label for="html5_avanzado">HTML5 avanzado</label>
-                    <input type="checkbox" id="css3_avanzado" name="css3_avanzado" value="150">
-                    <label for="css3_avanzado">CSS3 avanzado</label>
-                    <input type="checkbox" id="js_avanzado" name="js_avanzado" value="150">
-                    <label for="js_avanzado">JavaScript avanzado</label>
-                </fieldset>
-            </div>
-            <!-- Campo precio total. -->
-            <div>
-                <label>Precio total a pagar <span id="label-precio">0</span></label>
-            </div>            
-            <!-- Campo forma de pago. -->
-            <div>
-                <fieldset>
-                    <legend>Forma de pago</legend>
-    
-                    <input type="radio" id="tarjeta" name="payment" class="payment" value="tarjeta" required>
-                    <label for="tarjeta">Tarjeta de débito o crédito</label>
-                    <input type="radio" id="paypal" name="payment" class="payment" value="paypal">
-                    <label for="paypal">PayPal</label>
-                    <input type="radio" id="transferencia" name="payment" class="payment" value="transferencia">
-                    <label for="transferencia">Transferencia bancaria</label>
+                    <input type="checkbox" id="desarrollo" name="desarrollo">
+                    <label for="desarrollo">Desarrollo</label>
+                    <input type="checkbox" id="diseno" name="diseno">
+                    <label for="diseno">Diseño</label>
+                    <input type="checkbox" id="negocios" name="negocios">
+                    <label for="negocios">Negocios</label>
+                    <input type="checkbox" id="pruebas" name="pruebas">
+                    <label for="pruebas">Pruebas</label>
+                    <input type="checkbox" id="analisis" name="analisis">
+                    <label for="analisis">Análisis</label>
                 </fieldset>
             </div>
 
