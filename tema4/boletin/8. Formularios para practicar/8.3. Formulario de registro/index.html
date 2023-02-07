@@ -54,8 +54,11 @@
             <!-- Campo descripción personal. -->
             <div>
                 <textarea name="descripcion" id="descripcion"
-                class="descripcion" rows="10" cols="50" minlength="400"
+                class="descripcion" rows="10" cols="50" maxlength="400"
                 placeholder="Write something here..."></textarea>
+                <p>
+                    <span class="charCount" id="charCount">400</span>
+                </p>
             </div>
             <!-- Campo intereses. -->
             <div>
@@ -80,7 +83,6 @@
         </form>
 
         <!-- Importamos los ficheros JS. -->
-        <script type="module" src="js/db.js"></script>
-        <script type="module" src="js/script.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>

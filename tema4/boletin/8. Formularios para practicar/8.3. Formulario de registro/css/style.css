@@ -32,7 +32,7 @@ input.error {
     border: 2px solid rgb(210, 4, 4);
 }
 
-.inputError {
+.input_error_msg {
     font-size: small;
     margin: 0px;
     color: rgb(210, 4, 4);
