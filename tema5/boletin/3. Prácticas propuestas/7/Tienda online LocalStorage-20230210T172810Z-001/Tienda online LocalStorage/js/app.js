@@ -1,5 +1,6 @@
 // Importamos la base de datos
 import {productos} from "../db/db.js";
+import {categorias} from "../db/db.js";
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// MAIN /////////////////////////////////////
@@ -7,7 +8,8 @@ import {productos} from "../db/db.js";
 
 function iniciarListeners()
 {
-    window.addEventListener("load", cargarProductos);   
+    window.addEventListener("load", cargarProductos);  
+    window.addEventListener("load", mostrarFiltrosCategoria); 
 }
 
 iniciarListeners();
@@ -49,6 +51,34 @@ function crearHTMLProducto(p)
             </div>
         </div>
     </article>`;
+}
+
+function mostrarFiltrosCategoria()
+{
+    let div = document.querySelector("#filter-container");
+
+    let aux = '';
+    for (const c of categorias) {
+        aux += crearHTMLCategoria(c);
+    }
+    
+    div.innerHTML += `
+    <form>
+        <fieldset id="filtro-categoria" name="filtro-categoria">
+        <legend>Filtros por categoría:</legend>`
+    + aux +`
+        </fieldset>
+    </form>`;
+}
+
+function crearHTMLCategoria(c) {
+    const{id,nombre} = c;
+    return `
+    <div class="contenedor-categoria">
+        <input type="checkbox" id="${id}" name="${id}" value="${id}">
+        <label for="${id}">${nombre}</label>
+    </div>
+    `;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
