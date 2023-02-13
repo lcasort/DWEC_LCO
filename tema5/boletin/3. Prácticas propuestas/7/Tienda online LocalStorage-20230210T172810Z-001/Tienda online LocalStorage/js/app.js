@@ -1,6 +1,7 @@
-// Importamos la base de datos
-import {productos} from "../db/db.js";
-import {categorias} from "../db/db.js";
+// Importamos las funciones del controlador
+import {ControladorBD, ControladorCarrito} from "./controller.js";
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// MAIN /////////////////////////////////////
@@ -11,8 +12,8 @@ import {categorias} from "../db/db.js";
  */
 function iniciarListeners()
 {
-    window.addEventListener("load", cargarProductos);  
-    window.addEventListener("load", mostrarFiltrosCategoria); 
+    document.addEventListener("DOMContentLoaded", cargarProductos, false);  
+    document.addEventListener("DOMContentLoaded", mostrarFiltrosCategoria, false); 
 }
 
 // Inicializamos los listeners.
@@ -33,6 +34,7 @@ function cargarProductos()
 {
     let div = document.querySelector("#products-container");
 
+    const productos = ControladorBD.getProductos();
     for (const p of productos) {
         div.innerHTML += crearHTMLProducto(p);
     }
@@ -73,6 +75,7 @@ function mostrarFiltrosCategoria()
     let div = document.querySelector("#filter-container");
 
     let aux = '';
+    const categorias = ControladorBD.getCategorias();
     for (const c of categorias) {
         aux += crearHTMLCategoria(c);
     }
