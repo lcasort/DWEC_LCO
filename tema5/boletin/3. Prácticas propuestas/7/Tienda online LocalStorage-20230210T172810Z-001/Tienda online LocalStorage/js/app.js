@@ -13,7 +13,11 @@ import {ControladorBD, ControladorCarrito} from "./controller.js";
 function iniciarListeners()
 {
     document.addEventListener("DOMContentLoaded", cargarProductos, false);  
-    document.addEventListener("DOMContentLoaded", mostrarFiltrosCategoria, false); 
+    document.addEventListener("DOMContentLoaded", mostrarFiltrosCategoria,
+    false);
+
+    document.querySelector("#products-container").addEventListener("click",
+    annadirProductoCarritoEvento, false);
 }
 
 // Inicializamos los listeners.
@@ -105,3 +109,21 @@ function crearHTMLCategoria(c) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+function annadirProductoCarritoEvento(e) {
+    e.preventDefault();
+
+    const boton = e.target;
+    if(boton.classList.contains("add")) {
+        const id = boton.parentNode.parentNode.parentNode.id;
+        const prod = ControladorBD.getProducto(id);
+        ControladorCarrito.annadirProducto(prod);
+    }
+
+    actualizarCarrito();
+}
+
+function actualizarCarrito()
+{
+    
+}
