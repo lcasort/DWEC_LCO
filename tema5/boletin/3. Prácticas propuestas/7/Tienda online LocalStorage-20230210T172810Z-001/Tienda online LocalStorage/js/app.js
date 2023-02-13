@@ -6,12 +6,16 @@ import {categorias} from "../db/db.js";
 ///////////////////////////////////// MAIN /////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Método para inicializar los listeners necesarios.
+ */
 function iniciarListeners()
 {
     window.addEventListener("load", cargarProductos);  
     window.addEventListener("load", mostrarFiltrosCategoria); 
 }
 
+// Inicializamos los listeners.
 iniciarListeners();
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,6 +26,9 @@ iniciarListeners();
 //                                AUX. METHODS                                //
 ////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Método para cargar todos los productos de la página.
+ */
 function cargarProductos()
 {
     let div = document.querySelector("#products-container");
@@ -31,6 +38,11 @@ function cargarProductos()
     }
 }
 
+/**
+ * Método para crear el HTML de un producto.
+ * @param {Object} p 
+ * @returns 
+ */
 function crearHTMLProducto(p)
 {
     const{id,nombre,categoria,imagen,precio,vendedor,stock} = p;
@@ -53,6 +65,9 @@ function crearHTMLProducto(p)
     </article>`;
 }
 
+/**
+ * Método para mostrar el formulario de filtrado por categoría.
+ */
 function mostrarFiltrosCategoria()
 {
     let div = document.querySelector("#filter-container");
@@ -61,7 +76,7 @@ function mostrarFiltrosCategoria()
     for (const c of categorias) {
         aux += crearHTMLCategoria(c);
     }
-    
+
     div.innerHTML += `
     <form>
         <fieldset id="filtro-categoria" name="filtro-categoria">
@@ -71,6 +86,11 @@ function mostrarFiltrosCategoria()
     </form>`;
 }
 
+/**
+ * Método para crear el HTML de una categoría.
+ * @param {Object} c 
+ * @returns 
+ */
 function crearHTMLCategoria(c) {
     const{id,nombre} = c;
     return `
