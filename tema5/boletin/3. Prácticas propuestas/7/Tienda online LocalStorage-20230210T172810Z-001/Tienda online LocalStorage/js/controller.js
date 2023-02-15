@@ -18,7 +18,7 @@ export class ControladorBD
     static getProducto(id)
     {
         const pArray = productos.filter(prod => prod.id === id);
-        return pArray.length === 0 ? null : pArray;
+        return pArray.length === 0 ? null : pArray[0];
     }
 
     static getCategorias()
@@ -64,7 +64,7 @@ export class ControladorCarrito
 
     static existeProducto(id)
     {
-        ControladorCarrito.getProducto(id) !== null;
+        return ControladorCarrito.getProducto(id) !== null;
     }
 
     static getCantidadProducto(id)

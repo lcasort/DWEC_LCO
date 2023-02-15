@@ -125,5 +125,34 @@ function annadirProductoCarritoEvento(e) {
 
 function actualizarCarrito()
 {
-    
+    vaciarCarrito();
+    llenarCarrito();
+}
+
+function vaciarCarrito()
+{
+    document.querySelector('#lista-carrito tbody').innerHTML = '';
+}
+
+function llenarCarrito()
+{
+    const productos = ControladorCarrito.getProductos();
+
+    productos.forEach(p => {
+        const{id,nombre,categoria,imagen,precio,vendedor,stock,cantidad} = p;
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>
+            <img src="${imagen}">
+        </td>
+        <td>${nombre}</td>
+        <td>${precio}€</td>
+        <td>${cantidad}</td>
+        <td>
+            <a href="#" class="borrar-curso" data-id="${id}">X</a>
+        </td>
+        `;
+
+        document.querySelector('#lista-carrito tbody').appendChild(row);
+    });
 }
