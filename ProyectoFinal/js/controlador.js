@@ -25,4 +25,25 @@ export class ControladorPHP {
         }
         return respuestaJSON;
     }
+
+    static async getClientes()
+    {
+       // Esperamos a que "fetch" devuelva algo
+        const respuesta = await fetch(`citasClientes.php`, {
+                method : "POST",
+                /* El "content-type" debe coincidir con el tipo que se envíe
+                    en el "body" (más abajo). Si vamos a enviar un json, habría
+                    que especificar el "content-type" "application/json"
+                */
+                headers : {
+                    "content-type" : "application/json"
+                },
+                body : JSON.stringify({
+                    metodo: "getClientes"
+                })
+            });
+        // Esperamos a que se lea la respuesta del cuerpo y se devuelva como JSON
+        const respuestaJSON = await respuesta.json();
+        return respuestaJSON;
+    }
 }
