@@ -26,6 +26,10 @@ export class ControladorPHP {
         return respuestaJSON;
     }
 
+    /**
+     * Método que devuelve todos los clientes almacenados en la base de datos.
+     * @returns Respuesta del servidor en formato JSON
+     */
     static async getClientes()
     {
        // Esperamos a que "fetch" devuelva algo

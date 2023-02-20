@@ -1,13 +1,37 @@
 import {ControladorPHP as Controlador} from "./controlador.js";
 
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// MAIN ///////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Método que inicializa los listeners.
+ */
 function inicializarListeners()
 {
-    document.addEventListener("DOMContentLoaded", mostrarClientesEvento, false); 
+    // Listener para cargar los datos de los clientes de manera asíncrona.
+    document.addEventListener("DOMContentLoaded", mostrarClientesEvento, false);
+
+    // Listener para ir al formulario de registro de clientes.
+    document.querySelector("#crearCliente").addEventListener("click",
+    irFormularioRegistroCliente, false);
 }
 
 inicializarListeners();
 
-async function mostrarClientesEvento(e)
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// AUX. METHODS /////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////// 
+
+/**
+ * Método que muestra los clientes en la tabla.
+ */
+async function mostrarClientesEvento()
 {
     const clientes = await Controlador.getClientes();
 
@@ -17,6 +41,11 @@ async function mostrarClientesEvento(e)
     });
 }
 
+/**
+ * Método que genera el código HTML del cliente pasado por parámetro.
+ * @param {Object} cliente 
+ * @returns Código HTML para la fila correspondiente a un cliente.
+ */
 function generarHTMLCliente(cliente)
 {
     // Formateamos el NIF.
@@ -47,10 +76,20 @@ function generarHTMLCliente(cliente)
             <p class="text-gray-600">${resultTlf}</p>
         </td>
         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
-            <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 crearCita" data-clientenombre="Juan" data-clienteapellidos="Jiménez Gómez" data-clientenif="33489123F">Crear cita</a>
-            <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 verCitas" data-clientenombre="Juan" data-clienteapellidos="Jiménez Gómez" data-clientenif="33489123F">Ver citas</a>
-            <a href="#" class="block text-red-600 hover:text-red-900 eliminar" data-clientenombre="Juan" data-clienteapellidos="Jiménez Gómez" data-clientenif="33489123F">Eliminar cliente</a>
+            <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 crearCita" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clientenif="${cliente.nif}">Crear cita</a>
+            <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 verCitas" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clientenif="${cliente.nif}">Ver citas</a>
+            <a href="#" class="block text-red-600 hover:text-red-900 eliminar" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clientenif="${cliente.nif}">Eliminar cliente</a>
         </td>
     </tr>
     `;
 }
+
+/**
+ * Método que redirige al formulario de registro de clientes.
+ */
+function irFormularioRegistroCliente()
+{
+    window.location.href = "./nuevo-cliente.html";
+}
+
+////////////////////////////////////////////////////////////////////////////////
