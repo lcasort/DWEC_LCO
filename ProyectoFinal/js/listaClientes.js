@@ -16,6 +16,14 @@ function inicializarListeners()
     // Listener para ir al formulario de registro de clientes.
     document.querySelector("#crearCliente").addEventListener("click",
     irFormularioRegistroCliente, false);
+
+    // Listener para los links de crear cita, ver citas y eliminar cliente.
+    document.querySelector(".crearCita").addEventListener("click",
+    guardarDatosLocalStorageEvento, false);
+    document.querySelector(".verCitas").addEventListener("click",
+    guardarDatosLocalStorageEvento, false);
+    document.querySelector(".eliminar").addEventListener("click",
+    guardarDatosLocalStorageEvento, false);
 }
 
 inicializarListeners();
@@ -90,6 +98,12 @@ function generarHTMLCliente(cliente)
 function irFormularioRegistroCliente()
 {
     window.location.href = "./nuevo-cliente.html";
+}
+
+
+function guardarDatosLocalStorageEvento(e)
+{
+    // TODO
 }
 
 ////////////////////////////////////////////////////////////////////////////////

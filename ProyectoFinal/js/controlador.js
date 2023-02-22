@@ -30,7 +30,7 @@ export class ControladorPHP {
      * Método que devuelve todos los clientes almacenados en la base de datos.
      * @returns Respuesta del servidor en formato JSON
      */
-    static async getClientes()
+    static async getClientes(formulario)
     {
        // Esperamos a que "fetch" devuelva algo
         const respuesta = await fetch(`citasClientes.php`, {
@@ -48,6 +48,21 @@ export class ControladorPHP {
             });
         // Esperamos a que se lea la respuesta del cuerpo y se devuelva como JSON
         const respuestaJSON = await respuesta.json();
+        return respuestaJSON;
+    }
+
+    static async setCliente()
+    {
+        let respuestaJSON = null;
+        try {
+            const respuesta = await fetch(`citasClientes.php`, {
+                method : "POST",
+                body : new FormData(formulario)
+            });
+            respuestaJSON = await respuesta.json();
+        }catch(error) {
+            console.error(error.message);
+        }
         return respuestaJSON;
     }
 }

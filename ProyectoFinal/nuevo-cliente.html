@@ -30,17 +30,23 @@
                                     name="nombre"
                                     type="text"
                                     placeholder="Nombre Cliente"
+                                    minlength="4"
+                                    maxlength="30"
+                                    required
                                 />
                                 <p id="error-nombre" class="text-red-600 text-xs"></p>
                             </div>
                             <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Apellidos</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="apellidos">Apellidos</label>
                                 <input 
                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline auto-validable"
                                     id="apellidos"
                                     name="apellidos"
                                     type="text"
                                     placeholder="Apellidos Cliente"
+                                    minlength="8"
+                                    maxlength="50"
+                                    required
                                 />
                                 <p id="error-apellidos" class="text-red-600 text-xs"></p>
                             </div>
@@ -53,6 +59,8 @@
                                     type="email"
                                     placeholder="Email Cliente (ejemplo@dominio.com)"
                                     title="Debe introducir un correo válido"
+                                    pattern="^\S+@\S+\.\S.+$"
+                                    required
                                 />
                                 <p id="error-email" class="text-red-600 text-xs"></p>
                             </div>
@@ -66,6 +74,8 @@
                                     type="tel"
                                     placeholder="Teléfono Cliente (698 76 54 32)"
                                     title="El teléfono debe componerse de 9 números (pueden usarse espacios)"
+                                    pattern="^\d{3}[ ]?\d{2}[ ]?\d{2}[ ]?\d{2}$"
+                                    required
                                 />
                                 <p id="error-telefono" class="text-red-600 text-xs"></p>
                             </div>
@@ -79,6 +89,8 @@
                                     type="text"
                                     placeholder="NIF Cliente (12345678-R)"
                                     title="El NIF se compone de 8 números y una letra"
+                                    pattern="^\d{8}[-]?[A-Z]$"
+                                    required
                                 />
                                 <p id="error-nif" class="text-red-600 text-xs"></p>
                             </div>
