@@ -30,7 +30,7 @@ export class ControladorPHP {
      * Método que devuelve todos los clientes almacenados en la base de datos.
      * @returns Respuesta del servidor en formato JSON
      */
-    static async getClientes(formulario)
+    static async getClientes()
     {
        // Esperamos a que "fetch" devuelva algo
         const respuesta = await fetch(`citasClientes.php`, {
@@ -51,18 +51,47 @@ export class ControladorPHP {
         return respuestaJSON;
     }
 
-    static async setCliente()
+    static async setCliente(c)
     {
         let respuestaJSON = null;
         try {
             const respuesta = await fetch(`citasClientes.php`, {
                 method : "POST",
-                body : new FormData(formulario)
+                headers : {
+                    "content-type" : "application/json"
+                },
+                body : JSON.stringify({
+                    metodo : "setCliente",
+                    cliente: c
+                })
             });
             respuestaJSON = await respuesta.json();
         }catch(error) {
             console.error(error.message);
         }
+        return respuestaJSON;
+    }
+
+
+    static async getCitasCliente()
+    {
+        // Esperamos a que "fetch" devuelva algo
+        const respuesta = await fetch(`citasClientes.php`, {
+            method : "POST",
+            /* El "content-type" debe coincidir con el tipo que se envíe
+                en el "body" (más abajo). Si vamos a enviar un json, habría
+                que especificar el "content-type" "application/json"
+            */
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify({
+                metodo: "getCitasCliente",
+                nifCliente: localStorage.getItem('nif')
+            })
+        });
+        // Esperamos a que se lea la respuesta del cuerpo y se devuelva como JSON
+        const respuestaJSON = await respuesta.json();
         return respuestaJSON;
     }
 }

@@ -64,8 +64,10 @@ function validarFormulario(e)
 
     if(!formIsValid) {
         e.preventDefault();
+        darFocoCampo();
     } else {
-        enviarFromulario(e.target);
+        e.preventDefault();
+        enviarFormulario(document.querySelector('#formulario'));
     }
 }
 
@@ -147,14 +149,40 @@ function revisarErroresEvento(e)
     }
 }
 
-async function enviarFromulario(formulario)
+async function enviarFormulario(formulario)
 {
-    const formulario = new FormData(formulario);
+    const formularioData = new FormData(formulario);
 
-    const res = {
-        'method' : 'setCliente',
-        'cliente' : formulario
+    const cliente = {};
+    for (const pair of formularioData.entries()) {
+        let key = pair[0];
+        let val = pair[1];
+        if(key === "telefono") {
+            val = val.replaceAll(' ', '');
+        } else if(key === "nif") {
+            val = val.replaceAll('-', '');
+        }
+        cliente[key] = val;
     }
-    await Controlador.setClientes(formulario);
+
+    const resp = await Controlador.setCliente(cliente);
+
+    console.log(resp);
+    if(resp.resultado === "no") {
+        for (let i = 0; i < resp.camposError.length; i++) {
+            let campo = document.querySelector(`#${resp.camposError[i]}`);
+            borrarErrores(campo);
+            campo.classList.add(ERROR_CLASS);
+            mostrarErroresEn(resp.mensajesError[i], document.querySelector(`#error-${resp.camposError[i]}`));
+        }
+        darFocoCampo();
+    }
 }
+
+function darFocoCampo()
+{
+    const camposErrores = document.querySelectorAll(`.${ERROR_CLASS}`);
+    camposErrores[0].focus();
+}
+
 ////////////////////////////////////////////////////////////////////////////////

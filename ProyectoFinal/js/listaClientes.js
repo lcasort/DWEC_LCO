@@ -18,12 +18,8 @@ function inicializarListeners()
     irFormularioRegistroCliente, false);
 
     // Listener para los links de crear cita, ver citas y eliminar cliente.
-    document.querySelector(".crearCita").addEventListener("click",
-    guardarDatosLocalStorageEvento, false);
-    document.querySelector(".verCitas").addEventListener("click",
-    guardarDatosLocalStorageEvento, false);
-    document.querySelector(".eliminar").addEventListener("click",
-    guardarDatosLocalStorageEvento, false);
+    document.querySelector("#listado-clientes").addEventListener("click",
+    comprobarClick, false);
 }
 
 inicializarListeners();
@@ -101,9 +97,46 @@ function irFormularioRegistroCliente()
 }
 
 
-function guardarDatosLocalStorageEvento(e)
+function guardarDatosLocalStorage(campo)
 {
+    const nombre = campo.getAttribute('data-clientenombre');
+    const apellidos = campo.getAttribute('data-clienteapellidos');
+    const nif = campo.getAttribute('data-clientenif');
+    localStorage.setItem('nombre', nombre);
+    localStorage.setItem('apellidos', apellidos);
+    localStorage.setItem('nif', nif);
+}
+
+function crearCita(campo)
+{
+    guardarDatosLocalStorage(campo);
+    window.location.href = './nueva-cita.html';
+}
+
+function verCitas(campo)
+{
+    guardarDatosLocalStorage(campo);
+    window.location.href = './lista-citas.html';
+}
+
+function eliminarPaciente(campo)
+{
+    guardarDatosLocalStorage(campo);
     // TODO
+}
+
+function comprobarClick(e)
+{
+    const campo = e.target;
+    if(campo.classList.contains('crearCita')) {
+        crearCita(campo);
+    } else if (campo.classList.contains('verCitas')) {
+        verCitas(campo);
+    } else if (campo.classList.contains('eliminar')) {
+        eliminarPaciente(campo);
+    } else {
+        e.preventDefault();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
