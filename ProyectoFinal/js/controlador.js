@@ -32,13 +32,8 @@ export class ControladorPHP {
      */
     static async getClientes()
     {
-       // Esperamos a que "fetch" devuelva algo
         const respuesta = await fetch(`citasClientes.php`, {
                 method : "POST",
-                /* El "content-type" debe coincidir con el tipo que se envíe
-                    en el "body" (más abajo). Si vamos a enviar un json, habría
-                    que especificar el "content-type" "application/json"
-                */
                 headers : {
                     "content-type" : "application/json"
                 },
@@ -46,11 +41,16 @@ export class ControladorPHP {
                     metodo: "getClientes"
                 })
             });
-        // Esperamos a que se lea la respuesta del cuerpo y se devuelva como JSON
+
         const respuestaJSON = await respuesta.json();
         return respuestaJSON;
     }
 
+    /**
+     * Método que guarda un cliente en la base de datos.
+     * @param {Object} c 
+     * @returns Respuesta del servidor en formato JSON
+     */
     static async setCliente(c)
     {
         let respuestaJSON = null;
@@ -72,16 +72,15 @@ export class ControladorPHP {
         return respuestaJSON;
     }
 
-
+    /**
+     * Método que devuelve todas las citas de un cliente almacenadas en la base
+     * de datos.
+     * @returns Respuesta del servidor en formato JSON
+     */
     static async getCitasCliente()
     {
-        // Esperamos a que "fetch" devuelva algo
         const respuesta = await fetch(`citasClientes.php`, {
             method : "POST",
-            /* El "content-type" debe coincidir con el tipo que se envíe
-                en el "body" (más abajo). Si vamos a enviar un json, habría
-                que especificar el "content-type" "application/json"
-            */
             headers : {
                 "content-type" : "application/json"
             },
@@ -90,11 +89,16 @@ export class ControladorPHP {
                 nifCliente: localStorage.getItem('nif')
             })
         });
-        // Esperamos a que se lea la respuesta del cuerpo y se devuelva como JSON
+
         const respuestaJSON = await respuesta.json();
         return respuestaJSON;
     }
 
+    /**
+     * Método que guarda una cita asociada a un cliente en la base de datos.
+     * @param {Object} c 
+     * @returns Respuesta del servidor en formato JSON
+     */
     static async setCita(c)
     {
         let respuestaJSON = null;
@@ -116,6 +120,11 @@ export class ControladorPHP {
         return respuestaJSON;
     }
 
+    /**
+     * Método que elimina un cliente de la base de datos.
+     * @param {String} nifCliente 
+     * @returns Respuesta del servidor en formato JSON
+     */
     static async eliminarCliente(nifCliente) {
         let respuestaJSON = null;
         try {
@@ -136,6 +145,11 @@ export class ControladorPHP {
         return respuestaJSON;
     }
 
+    /**
+     * Método que elimina una cita de la base de datos.
+     * @param {String} idCita 
+     * @returns Respuesta del servidor en formato JSON
+     */
     static async eliminarCita(idCita) {
         let respuestaJSON = null;
         try {

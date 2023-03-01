@@ -10,17 +10,25 @@ const ERROR_CLASS = 'border-red-600';
 document.querySelector("input[type=submit]").setAttribute('formnovalidate',
 'formnovalidate');
 
+// Ponemos el foco en el primer elemento del formulario.
+document.querySelectorAll("input")[0].focus();
+
 /**
  * Método que inicializa los listeners.
  */
 function inicializarListeners()
 {
+    // Listener para validar el formulario cuando hacemos click en
+    // "AGREGAR CITA".
     document.querySelector("input[type=submit]").addEventListener("click",
     validarFormulario, false);
 
+    // Listener para volver al listado de las citas cuando hacemos click en
+    // "CANCELAR".
     document.querySelector("#cancelar").addEventListener("click",
     irListadoCitas, false);
 
+    // Listeners para validar los inputs del formulario.
     const campos = document.querySelectorAll(".auto-validable");
     for (let i = 0; i < campos.length; i++) {
         document.querySelector(`#${campos[i].id}`).addEventListener("blur",
@@ -43,7 +51,7 @@ inicializarListeners();
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Método que reenvía a la página principal (el listado de clientes).
+ * Método que reenvía a la página principal (el listado de citas).
  */
 function irListadoCitas()
 {
@@ -125,6 +133,11 @@ function mostrarError(e)
     mostrarErroresEn(messages, document.querySelector(`#error-${campo.id}`));
 }
 
+/**
+ * Método que imprime por pantalla los errores de un campo debajo de este. 
+ * @param {Array} messages 
+ * @param {HTMLElement} campo 
+ */
 function mostrarErroresEn(messages, campo)
 {
     for (let i = 0; i < messages.length; i++) {
@@ -132,6 +145,10 @@ function mostrarErroresEn(messages, campo)
     }
 }
 
+/**
+ * Método que borra los errores de un campo.
+ * @param {HTMLElement} campo 
+ */
 function borrarErrores(campo)
 {
     if(campo.classList.contains(ERROR_CLASS)) {
@@ -140,6 +157,10 @@ function borrarErrores(campo)
     }
 }
 
+/**
+ * Método que revisa si un campo sigue siendo invalid o no.
+ * @param {Event} e 
+ */
 function revisarErroresEvento(e)
 {
     const campo = e.target;
@@ -149,10 +170,16 @@ function revisarErroresEvento(e)
     }
 }
 
+/**
+ * Método que envía el formulario al servidor para guardar la cita en la base
+ * de datos y, en el caso de haber errores, los muestra por pantalla.
+ * @param {HTMLElement} formulario 
+ */
 async function enviarFormulario(formulario)
 {
     const formularioData = new FormData(formulario);
     
+    // Creamos un objeto con los datos de la cita.
     const cita = {};
     cita['nifCliente'] = localStorage.getItem('nif');
     for (const pair of formularioData.entries()) {
@@ -161,8 +188,12 @@ async function enviarFormulario(formulario)
         cita[key] = val;
     }
     
+    // Llamamos al controlador para realizar la petición al servidor.
     const resp = await Controlador.setCita(cita);
 
+    // Si el servidor nos devuelve un error, mostramos los errores
+    // correspondientes a cada campo debajo de este, y le damos el foco al
+    // primer campo con errores.
     console.log(resp);
     if(resp.resultado === "no") {
         for (let i = 0; i < resp.camposError.length; i++) {
@@ -175,6 +206,9 @@ async function enviarFormulario(formulario)
     }
 }
 
+/**
+ * Método que da el foto al primer campo del formulario con errores.
+ */
 function darFocoCampo()
 {
     const camposErrores = document.querySelectorAll(`.${ERROR_CLASS}`);

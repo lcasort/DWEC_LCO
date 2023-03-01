@@ -96,7 +96,10 @@ function irFormularioRegistroCliente()
     window.location.href = "./nuevo-cliente.html";
 }
 
-
+/**
+ * Método que guarda el nombre, apellidos y nif del cliente en localStorage.
+ * @param {HTMLElement} campo 
+ */
 function guardarDatosLocalStorage(campo)
 {
     const nombre = campo.getAttribute('data-clientenombre');
@@ -107,18 +110,34 @@ function guardarDatosLocalStorage(campo)
     localStorage.setItem('nif', nif);
 }
 
+/**
+ * Método que guarda los datos del cliente en localStorage (función
+ * guardarDatosLocalStorage) y reenvía a el formulario de creación de una nueva
+ * citas.
+ * @param {HTMLElement} campo 
+ */
 function crearCita(campo)
 {
     guardarDatosLocalStorage(campo);
     window.location.href = './nueva-cita.html';
 }
 
+/**
+ * Método que guarda los datos del cliente en localStorage (función
+ * guardarDatosLocalStorage) y reenvía al listado de citas del cliente.
+ * @param {HTMLElement} campo 
+ */
 function verCitas(campo)
 {
     guardarDatosLocalStorage(campo);
     window.location.href = './lista-citas.html';
 }
 
+/**
+ * Método que muestra un pop-up de confimación preguntando si deseas borrar el
+ * paciente. En caso de aceptar, procede a borrarlo de la base de datos.
+ * @param {HTMLElement} campo 
+ */
 async function eliminarPaciente(campo)
 {
     const res = confirm(`¿Seguro que desea eliminar al cliente ${campo.getAttribute('data-clientenombre')} ${campo.getAttribute('data-clienteapellidos')}?`);
@@ -127,6 +146,11 @@ async function eliminarPaciente(campo)
     }
 }
 
+/**
+ * Método que comprueba si se ha hecho click en el link 'Crear cita',
+ * 'Ver citas' o 'Eliminar' para proceder a llamar al método correspondiente.
+ * @param {Event} e 
+ */
 function comprobarClick(e)
 {
     const campo = e.target;

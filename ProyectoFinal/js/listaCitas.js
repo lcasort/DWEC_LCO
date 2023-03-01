@@ -52,8 +52,8 @@ async function mostrarCitasEvento()
 
 /**
  * Método que genera el código HTML del cliente pasado por parámetro.
- * @param {Object} cliente 
- * @returns Código HTML para la fila correspondiente a un cliente.
+ * @param {Object} cita 
+ * @returns Código HTML para la fila correspondiente a un cliente
  */
 function generarHTMLCitas(cita)
 {
@@ -81,6 +81,11 @@ function generarHTMLCitas(cita)
     `;
 }
 
+/**
+ * Método que formatea la fecha de YYYY/MM/DD a DD/MM/YYYY.
+ * @param {String} strFecha 
+ * @returns String de la fecha en formato DD/MM/YYYY
+ */
 function formatearFecha(strFecha)
 {
     const regexFecha = /^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/gm;
@@ -105,7 +110,11 @@ function irListadoClientes()
     window.location.href = './index.html';
 }
 
-
+/**
+ * Método que comprueba si se ha hecho click en el link 'Eliminar' para eliminar
+ * una cita.
+ * @param {Event} e 
+ */
 function comprobarClick(e)
 {
     const campo = e.target;
@@ -114,6 +123,11 @@ function comprobarClick(e)
     }
 }
 
+/**
+ * Método que muestra un pop-up de confimación preguntando si deseas borrar la
+ * cita. En caso de aceptar, procede a borrarla de la base de datos.
+ * @param {HTMLElement} campo 
+ */
 async function eliminarCita(campo)
 {
     const res = confirm(`¿Seguro que desea eliminar la cita del ${formatearFecha(campo.getAttribute('data-citafecha'))} a las ${campo.getAttribute('data-citahora')}?`);
