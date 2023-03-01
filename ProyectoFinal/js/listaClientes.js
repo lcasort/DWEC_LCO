@@ -119,10 +119,12 @@ function verCitas(campo)
     window.location.href = './lista-citas.html';
 }
 
-function eliminarPaciente(campo)
+async function eliminarPaciente(campo)
 {
-    guardarDatosLocalStorage(campo);
-    // TODO
+    const res = confirm(`¿Seguro que desea eliminar al cliente ${campo.getAttribute('data-clientenombre')} ${campo.getAttribute('data-clienteapellidos')}?`);
+    if(res) {
+        const respuesta = await Controlador.eliminarCliente(campo.getAttribute('data-clientenif'));
+    }
 }
 
 function comprobarClick(e)

@@ -13,6 +13,18 @@ function inicializarListeners()
 {
     // Listener para cargar los datos de las citas del cliente de manera asíncrona.
     document.addEventListener("DOMContentLoaded", mostrarCitasEvento, false);
+
+    // Listener para ir al formulario de creación de citas.
+    document.querySelector("#crearCita").addEventListener("click", irCrearCita,
+    false);
+
+    // Listener para ir al listado de clientes.
+    document.querySelector("#volverClientes").addEventListener("click",
+    irListadoClientes, false);
+
+    // Listener para los links de crear cita, ver citas y eliminar cliente.
+    document.querySelector("#listado-citas").addEventListener("click",
+    comprobarClick, false);
 }
 
 inicializarListeners();
@@ -46,10 +58,7 @@ async function mostrarCitasEvento()
 function generarHTMLCitas(cita)
 {
     // Formateamos la fecha.
-    const regexFecha = /^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/gm;
-    const strFecha = cita.fecha;
-    const fecha = `$3-$2-$1`;
-    const resultFecha = strFecha.replace(regexFecha, fecha);
+    const resultFecha = formatearFecha(cita.fecha);
 
     return `
     <tr>
@@ -70,6 +79,47 @@ function generarHTMLCitas(cita)
         </td>
     </tr>
     `;
+}
+
+function formatearFecha(strFecha)
+{
+    const regexFecha = /^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/gm;
+    const fecha = `$3-$2-$1`;
+    const resultFecha = strFecha.replace(regexFecha, fecha);
+    return resultFecha;
+}
+
+/**
+ * Método que reenvía al formulario de creación de una nueva cita.
+ */
+function irCrearCita()
+{
+    window.location.href = './nueva-cita.html';
+}
+
+/**
+ * Método que reenvía a la página principal (el listado de clientes).
+ */
+function irListadoClientes()
+{
+    window.location.href = './index.html';
+}
+
+
+function comprobarClick(e)
+{
+    const campo = e.target;
+    if (campo.classList.contains('eliminar')) {
+        eliminarCita(campo);
+    }
+}
+
+async function eliminarCita(campo)
+{
+    const res = confirm(`¿Seguro que desea eliminar la cita del ${formatearFecha(campo.getAttribute('data-citafecha'))} a las ${campo.getAttribute('data-citahora')}?`);
+    if(res) {
+        const respuesta = await Controlador.eliminarCita(campo.getAttribute('data-citaid'));
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
