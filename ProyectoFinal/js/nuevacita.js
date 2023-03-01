@@ -55,7 +55,7 @@ inicializarListeners();
  */
 function irListadoCitas()
 {
-    window.location.href = './index.html';
+    window.location.href = './lista-citas.html';
 }
 
 /**
