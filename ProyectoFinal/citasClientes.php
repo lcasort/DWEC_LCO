@@ -133,7 +133,7 @@ if ($metodo === "getClientes") {
     getCitas($conn);
 } else if ($metodo === "editarCliente") {
     $clienteJSON = $datos->cliente;
-    editarCita($conn, $clienteJSON);
+    editarCliente($conn, $clienteJSON);
 }
 
 function setCita($conn, $citaJSON)
@@ -331,7 +331,7 @@ function eliminarBD($conn, $nombreBD)
     echo json_encode($devolver);
 }
 
-function editarCita($conn, $clienteJSON)
+function editarCliente($conn, $clienteJSON)
 {
     $sqlquery = "SELECT * FROM Cliente WHERE Cliente.email='$clienteJSON->email' AND NOT Cliente.nif='$clienteJSON->nif'";
     $clientesEmail = $conn->query($sqlquery);
