@@ -1,5 +1,7 @@
 import {ControladorPHP as Controlador} from "./controlador.js";
 
+[...document.querySelectorAll("p[id^=error-]")].forEach(e => e.classList.add("h-2"));
+
 document.getElementById("eliminarBD").addEventListener("click", eliminarDatosSesionEvento, false);
 
 async function eliminarDatosSesionEvento(e) {
