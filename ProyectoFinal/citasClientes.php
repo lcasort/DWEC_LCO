@@ -131,6 +131,9 @@ if ($metodo === "getClientes") {
     // Este método tiene fines de depuración. Obtiene todas las citas del sistema,
     // no importa el cliente al que pertenezcan
     getCitas($conn);
+} else if ($metodo === "editarCliente") {
+    $clienteJSON = $datos->cliente;
+    editarCita($conn, $clienteJSON);
 }
 
 function setCita($conn, $citaJSON)
@@ -328,4 +331,34 @@ function eliminarBD($conn, $nombreBD)
     echo json_encode($devolver);
 }
 
+function editarCita($conn, $clienteJSON)
+{
+    $sqlquery = "SELECT * FROM Cliente WHERE Cliente.email='$clienteJSON->email' AND NOT Cliente.nif='$clienteJSON->nif'";
+    $clientesEmail = $conn->query($sqlquery);
+    $arrayClientesEmail = obtenerArrayDeConsultaClientes($clientesEmail);
+
+    $devolver = (object) [
+        "resultado" => "ok",
+        "camposError" => array(),
+        "mensajesError" => array(),
+        "datos" => $clienteJSON
+    ];
+    if (count($arrayClientesEmail) === 0) {
+        $sqlquery = "UPDATE Cliente SET nombre='$clienteJSON->nombre', 
+        apellidos='$clienteJSON->apellidos', 
+        email='$clienteJSON->email', 
+        telefono='$clienteJSON->telefono' WHERE Cliente.nif='$clienteJSON->nif'";
+        // echo "<br>".$sqlquery."<br>";
+        $conn->query($sqlquery);
+
+    } else {
+        if (count($arrayClientesEmail) > 0) {
+            $devolver->resultado = "no";
+            array_push($devolver->camposError, "email");
+            array_push($devolver->mensajesError, "El correo electrónico $clienteJSON->email ya se encuentra en el sistema");
+        }
+    }
+
+    echo json_encode($devolver);
+}
 ?>

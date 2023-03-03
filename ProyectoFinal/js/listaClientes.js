@@ -82,6 +82,7 @@ function generarHTMLCliente(cliente)
         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
             <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 crearCita" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clientenif="${cliente.nif}">Crear cita</a>
             <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 verCitas" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clientenif="${cliente.nif}">Ver citas</a>
+            <a href="#" class="block text-teal-600 hover:text-teal-900 mr-2 editar" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clienteemail="${cliente.email}" data-clientetelefono="${cliente.telefono}" data-clientenif="${cliente.nif}">Editar cliente</a>
             <a href="#" class="block text-red-600 hover:text-red-900 eliminar" data-clientenombre="${cliente.nombre}" data-clienteapellidos="${cliente.apellidos}" data-clientenif="${cliente.nif}">Eliminar cliente</a>
         </td>
     </tr>
@@ -146,6 +147,16 @@ async function eliminarPaciente(campo)
     }
 }
 
+function editarPaciente(campo)
+{
+    guardarDatosLocalStorage(campo);
+    const email = campo.getAttribute('data-clienteemail');
+    const telefono = campo.getAttribute('data-clientetelefono');
+    localStorage.setItem('email', email);
+    localStorage.setItem('telefono', telefono);
+    window.location.href = './editar-cliente.html';
+}
+
 /**
  * Método que comprueba si se ha hecho click en el link 'Crear cita',
  * 'Ver citas' o 'Eliminar' para proceder a llamar al método correspondiente.
@@ -160,6 +171,8 @@ function comprobarClick(e)
         verCitas(campo);
     } else if (campo.classList.contains('eliminar')) {
         eliminarPaciente(campo);
+    } else if (campo.classList.contains('editar')) {
+        editarPaciente(campo);
     } else {
         e.preventDefault();
     }
